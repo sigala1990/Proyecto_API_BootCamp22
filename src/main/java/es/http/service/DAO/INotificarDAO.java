@@ -1,5 +1,9 @@
 package es.http.service.DAO;
 
-public class INotificarDAO {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import es.http.service.dto.Notificar;
+
+public interface INotificarDAO extends JpaRepository<Notificar, Integer>{
 
 }

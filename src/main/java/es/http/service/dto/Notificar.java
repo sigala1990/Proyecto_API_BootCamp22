@@ -25,11 +25,11 @@ public class Notificar {
 	//TODO revisar @ManyToMany
 	@ManyToMany
 	@JoinColumn(name="usuario_emisor_id")
-	private Usuario usuario_emisor_id;
+	Usuario usuario_emisor_id;
 	
 	@ManyToMany
 	@JoinColumn(name="usuario_receptor_id")
-	private Usuario usuario_receptor_id;
+	Usuario usuario_receptor_id;
 
 	public Notificar() {
 		super();
