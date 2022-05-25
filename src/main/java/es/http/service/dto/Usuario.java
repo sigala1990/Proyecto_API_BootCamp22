@@ -29,9 +29,9 @@ public class Usuario {
 	@JoinColumn(name = "id")
 	private List<Libro> libros;
 
-	// relacion notificar
+	// TODO relacion notificar
 
-	// relacion valorar
+	// TODO relacion valorar
 	public Usuario() {
 		super();
 	}
