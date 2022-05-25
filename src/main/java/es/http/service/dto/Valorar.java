@@ -13,5 +13,4 @@ public class Valorar {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@Column
 }
