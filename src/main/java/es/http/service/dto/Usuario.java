@@ -36,12 +36,11 @@ public class Usuario {
 		super();
 	}
 
-	public Usuario(int id, String nombre, String email, List<Libro> libros) {
+	public Usuario(int id, String nombre, String email ) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.email = email;
-		this.libros = libros;
 	}
 
 	public int getId() {
@@ -68,9 +67,6 @@ public class Usuario {
 		this.email = email;
 	}
 
-	public List<Libro> getLibros() {
-		return libros;
-	}
 
 	public void setLibros(List<Libro> libros) {
 		this.libros = libros;
