@@ -57,3 +57,14 @@ usuario_emisor_id int,
 usuario_receptor_id int,
 foreign key (usuario_emisor_id) references usuario(id)on delete cascade  on update cascade,
 foreign key (usuario_receptor_id) references usuario(id)on delete cascade on update cascade);
+
+drop table if exists prestacion;
+create table prestacion(
+id int auto_increment primary key,
+usuario_prestacion_id int,
+libro_prestacion_id int,
+prestar_id int,
+foreign key (usuario_prestacion_id) references usuario(id)on delete cascade  on update cascade,
+foreign key (prestar_id) references prestar(id)on delete cascade  on update cascade,
+foreign key (libro_prestacion_id) references libro(id)on delete cascade on update cascade);
+
