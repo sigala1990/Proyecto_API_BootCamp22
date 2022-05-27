@@ -1,5 +1,7 @@
 package es.http.service.dto;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -48,14 +51,18 @@ public class Libro {
     @ManyToOne
     @JoinColumn(name = "editorial_id")
     Editorial editorial;
-
+    
+    @OneToMany
+    @JoinColumn(name = "libro_id")
+    List<Libro> libro;
+    
 	public Libro() {
 		super();
 	}
 
 	public Libro(int id, String autor, String titulo, String isbn, int edad, String categoria,
 			int duracion_reserva_dias, int cantidad_veces_reservado, String url_img, Usuario usuario,
-			Editorial editorial) {
+			Editorial editorial, List<Libro> libro) {
 		super();
 		this.id = id;
 		this.autor = autor;
@@ -68,6 +75,7 @@ public class Libro {
 		this.url_img = url_img;
 		this.usuario = usuario;
 		this.editorial = editorial;
+		this.libro = libro;
 	}
 
 	public int getId() {
@@ -158,13 +166,23 @@ public class Libro {
 		this.editorial = editorial;
 	}
 
+	public List<Libro> getLibro() {
+		return libro;
+	}
+
+	public void setLibro(List<Libro> libro) {
+		this.libro = libro;
+	}
+
 	@Override
 	public String toString() {
 		return "Libro [id=" + id + ", autor=" + autor + ", titulo=" + titulo + ", isbn=" + isbn + ", edad=" + edad
 				+ ", categoria=" + categoria + ", duracion_reserva_dias=" + duracion_reserva_dias
 				+ ", cantidad_veces_reservado=" + cantidad_veces_reservado + ", url_img=" + url_img + ", usuario="
-				+ usuario + ", editorial=" + editorial + "]";
+				+ usuario + ", editorial=" + editorial + ", libro=" + libro + "]";
 	}
+
+	
 	
 	
 }

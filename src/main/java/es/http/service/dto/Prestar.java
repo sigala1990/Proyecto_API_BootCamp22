@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -26,19 +27,19 @@ public class Prestar {
 	@Column(name = "fecha_fin") 
 	private Date fecha_fin;
 	
-	@ManyToMany
+	@ManyToOne
     @JoinColumn(name = "usuario_id")
-	private List<Usuario> usuario;
+	private Usuario usuario;
  
-    @ManyToMany
+    @ManyToOne
     @JoinColumn(name = "libro_id")
-    private List<Libro> libro;
+    private Libro libro;
 
 	public Prestar() {
 		super();
 	}
 
-	public Prestar(int id, Date fecha_inicio, Date fecha_fin, List<Usuario> usuario, List<Libro> libro) {
+	public Prestar(int id, Date fecha_inicio, Date fecha_fin, Usuario usuario, Libro libro) {
 		super();
 		this.id = id;
 		this.fecha_inicio = fecha_inicio;
@@ -71,19 +72,19 @@ public class Prestar {
 		this.fecha_fin = fecha_fin;
 	}
 
-	public List<Usuario> getUsuario() {
+	public Usuario getUsuario() {
 		return usuario;
 	}
 
-	public void setUsuario(List<Usuario> usuario) {
+	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
 
-	public List<Libro> getLibro() {
+	public Libro getLibro() {
 		return libro;
 	}
 
-	public void setLibro(List<Libro> libro) {
+	public void setLibro(Libro libro) {
 		this.libro = libro;
 	}
 
