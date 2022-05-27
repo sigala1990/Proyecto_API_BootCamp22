@@ -3,10 +3,11 @@ package es.http.service.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import es.http.service.DAO.IUsuarioDAO;
 import es.http.service.dto.Usuario;
-
+@Service
 public class UsuarioServiceImpl implements IUsuarioService {
 	@Autowired
 	IUsuarioDAO iUsuarioDAO;
