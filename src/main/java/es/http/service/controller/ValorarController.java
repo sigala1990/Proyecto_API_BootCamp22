@@ -40,7 +40,7 @@ public class ValorarController {
 		
 		Valorar Valorar_xid= new Valorar();
 		
-		Valorar_xid=valorarServiceImpl.ValorarXID(id);
+		Valorar_xid=valorarServiceImpl.valorarXID(id);
 				
 		return Valorar_xid;
 	}
