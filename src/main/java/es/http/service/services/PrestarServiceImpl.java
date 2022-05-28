@@ -27,7 +27,7 @@ public class PrestarServiceImpl implements IPrestarService{
 	}
 
 	@Override
-	public Prestar PrestarXID(int id) {
+	public Prestar prestarXID(int id) {
 		// TODO Auto-generated method stub
 		return iPrestarDAO.findById(id).get();
 	}

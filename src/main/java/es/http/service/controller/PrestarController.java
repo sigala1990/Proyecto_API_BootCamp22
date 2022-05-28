@@ -40,7 +40,7 @@ public class PrestarController {
 		
 		Prestar Prestar_xid= new Prestar();
 		
-		Prestar_xid=prestarServiceImpl.PrestarXID(id);
+		Prestar_xid=prestarServiceImpl.prestarXID(id);
 				
 		return Prestar_xid;
 	}
@@ -51,7 +51,7 @@ public class PrestarController {
 		Prestar Prestar_seleccionado= new Prestar();
 		Prestar Prestar_actualizado= new Prestar();
 		
-		Prestar_seleccionado= prestarServiceImpl.PrestarXID(id);
+		Prestar_seleccionado= prestarServiceImpl.prestarXID(id);
 		
 		
 		Prestar_seleccionado.setFecha_inicio(Prestar.getFecha_inicio());

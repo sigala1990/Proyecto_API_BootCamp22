@@ -11,7 +11,7 @@ public interface IPrestarService {
 
 	public Prestar guardarPrestar(Prestar prestar); // Guarda un RegistroPrestar CREATE
 
-	public Prestar PrestarXID(int id); // Leer datos de un RegistroPrestar READ
+	public Prestar prestarXID(int id); // Leer datos de un RegistroPrestar READ
 
 	public Prestar actualizarPrestar(Prestar prestar); // Actualiza datos del RegistroPrestar UPDATE
 
