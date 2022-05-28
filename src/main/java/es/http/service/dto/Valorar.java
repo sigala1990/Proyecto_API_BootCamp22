@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -24,28 +25,23 @@ public class Valorar {
 	private Date fecha;
 	@Column(name ="comentario")
 	private String comentario;
-	//TODO revisar MTM
-	@ManyToMany
-	@JoinColumn(name="usuario_id")
-	private List<Usuario> usuario_id;
-	//TODO revisar MTM
-	@ManyToMany
-	@JoinColumn(name="libro_id")
-	private List<Libro> libro_id;
-	
+
+	@OneToMany
+	@JoinColumn(name="valorar_id")
+	private List<Valoracion> valoracion;
+
 	
 	public Valorar() {
 		super();
 	}
 
 
-	public Valorar(int id, Date fecha, String comentario, List<Usuario> usuario_id, List<Libro> libro_id) {
+	public Valorar(int id, Date fecha, String comentario, List<Valoracion> valoracion) {
 		super();
 		this.id = id;
 		this.fecha = fecha;
 		this.comentario = comentario;
-		this.usuario_id = usuario_id;
-		this.libro_id = libro_id;
+		this.valoracion = valoracion;
 	}
 
 
@@ -79,25 +75,15 @@ public class Valorar {
 	}
 
 
-	public List<Usuario> getUsuario_id() {
-		return usuario_id;
+	public List<Valoracion> getValoracion() {
+		return valoracion;
 	}
 
 
-	public void setUsuario_id(List<Usuario> usuario_id) {
-		this.usuario_id = usuario_id;
+	public void setValoracion(List<Valoracion> valoracion) {
+		this.valoracion = valoracion;
 	}
 
-
-	public List<Libro> getLibro_id() {
-		return libro_id;
-	}
-
-
-	public void setLibro_id(List<Libro> libro_id) {
-		this.libro_id = libro_id;
-	}
-	
 	
 	
 	

@@ -56,8 +56,6 @@ public class ValorarController {
 		
 		Valorar_seleccionado.setFecha(valorar.getFecha());
 		Valorar_seleccionado.setComentario(valorar.getComentario());
-		Valorar_seleccionado.setLibro_id(valorar.getLibro_id());
-		Valorar_seleccionado.setUsuario_id(valorar.getUsuario_id());
 		
 		Valorar_actualizado = valorarServiceImpl.actualizarValorar(Valorar_seleccionado);
 		
