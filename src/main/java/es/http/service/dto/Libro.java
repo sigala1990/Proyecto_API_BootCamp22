@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -11,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "libro") // en caso que la tabala sea diferente
@@ -53,8 +56,8 @@ public class Libro {
     Editorial editorial;
     
     @OneToMany
-    @JoinColumn(name = "libro_id")
-    List<Libro> libro;
+	@JoinColumn(name = "id") //Referencia a id de Libro
+	private List<Prestacion> prestacion;
     
 	public Libro() {
 		super();
@@ -62,7 +65,7 @@ public class Libro {
 
 	public Libro(int id, String autor, String titulo, String isbn, int edad, String categoria,
 			int duracion_reserva_dias, int cantidad_veces_reservado, String url_img, Usuario usuario,
-			Editorial editorial, List<Libro> libro) {
+			Editorial editorial, List<Prestacion> prestacion) {
 		super();
 		this.id = id;
 		this.autor = autor;
@@ -75,7 +78,7 @@ public class Libro {
 		this.url_img = url_img;
 		this.usuario = usuario;
 		this.editorial = editorial;
-		this.libro = libro;
+		this.prestacion = prestacion;
 	}
 
 	public int getId() {
@@ -166,12 +169,14 @@ public class Libro {
 		this.editorial = editorial;
 	}
 
-	public List<Libro> getLibro() {
-		return libro;
+	@JsonIgnore
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "Prestacion")
+	public List<Prestacion> getPrestacion() {
+		return prestacion;
 	}
 
-	public void setLibro(List<Libro> libro) {
-		this.libro = libro;
+	public void setPrestacion(List<Prestacion> prestacion) {
+		this.prestacion = prestacion;
 	}
 
 	@Override
@@ -179,10 +184,8 @@ public class Libro {
 		return "Libro [id=" + id + ", autor=" + autor + ", titulo=" + titulo + ", isbn=" + isbn + ", edad=" + edad
 				+ ", categoria=" + categoria + ", duracion_reserva_dias=" + duracion_reserva_dias
 				+ ", cantidad_veces_reservado=" + cantidad_veces_reservado + ", url_img=" + url_img + ", usuario="
-				+ usuario + ", editorial=" + editorial + ", libro=" + libro + "]";
+				+ usuario + ", editorial=" + editorial + ", prestacion=" + prestacion + "]";
 	}
-
-	
 	
 	
 }
