@@ -4,12 +4,15 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "usuario")
@@ -97,6 +100,9 @@ public class Usuario {
 		this.email = email;
 	}
 
+	public List<Libro> getLibros() {
+		return libros;
+	}
 
 	public void setLibros(List<Libro> libros) {
 		this.libros = libros;
@@ -110,6 +116,9 @@ public class Usuario {
 		this.valoracion = valoracion;
 	}
 
+	
+	@JsonIgnore
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "Prestacion")
 	public List<Prestacion> getPrestacion() {
 		return prestacion;
 	}
@@ -138,5 +147,10 @@ public class Usuario {
 	
 
 	
+	@Override
+	public String toString() {
+		return "Usuario [id=" + id + ", nombre=" + nombre + ", email=" + email + ", libros=" + libros + ", prestacion="
+				+ prestacion + "]";
+	}
  
 }
