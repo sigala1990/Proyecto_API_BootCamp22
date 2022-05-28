@@ -57,8 +57,7 @@ public class NotificarController {
 		
 		Notificar_seleccionado.setFecha(notificar.getFecha());
 		Notificar_seleccionado.setMensaje(notificar.getMensaje());
-		//Notificar_seleccionado.setUsuario_emisor_id(notificar.getUsuario_emisor_id());
-		//Notificar_seleccionado.setUsuario_receptor_id(notificar.getUsuario_receptor_id());
+		Notificar_seleccionado.setEstado(notificar.getEstado());
 		
 		Notificar_actualizado = notificarServiceImpl.actualizarNotificar(Notificar_seleccionado);
 		
