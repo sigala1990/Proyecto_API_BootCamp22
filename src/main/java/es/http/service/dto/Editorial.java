@@ -5,6 +5,8 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
@@ -18,8 +20,8 @@ public class Editorial {
 
 	// Atributos de entidad registro_curso
 	@Id
-	@Column(name = "id") // no hace falta si se llama igual
-	private String id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
 
 	@Column(name = "nombre") // no hace falta si se llama igual
 	private String nombre;
@@ -32,18 +34,18 @@ public class Editorial {
 		super();
 	}
 
-	public Editorial(String id, String nombre, List<Libro> libro) {
+	public Editorial(int id, String nombre, List<Libro> libro) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.libro = libro;
 	}
 
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 

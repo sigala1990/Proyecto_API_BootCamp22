@@ -99,7 +99,8 @@ public class Usuario {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
+	@JsonIgnore
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "Libros")
 	public List<Libro> getLibros() {
 		return libros;
 	}
@@ -107,7 +108,8 @@ public class Usuario {
 	public void setLibros(List<Libro> libros) {
 		this.libros = libros;
 	}
-
+	@JsonIgnore
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "Valoracion")
 	public List<Valoracion> getValoracion() {
 		return valoracion;
 	}
@@ -127,6 +129,8 @@ public class Usuario {
 		this.prestacion = prestacion;
 	}
 
+	@JsonIgnore
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "Notificacion")
 	public List<Notificacion> getNotificacion_emisor() {
 		return notificacion_emisor;
 	}
@@ -135,6 +139,8 @@ public class Usuario {
 		this.notificacion_emisor = notificacion_emisor;
 	}
 
+	@JsonIgnore
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "Notificacion")
 	public List<Notificacion> getNotificacion_receptor() {
 		return notificacion_receptor;
 	}

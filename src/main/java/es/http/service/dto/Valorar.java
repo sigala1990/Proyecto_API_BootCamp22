@@ -20,33 +20,22 @@ public class Valorar {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-
 	@Column(name = "fecha")
 	private Date fecha;
 	@Column(name ="comentario")
 	private String comentario;
-	//TODO revisar MTM
-	@ManyToMany
-	@JoinColumn(name="usuario_id")
-	private List<Usuario> usuario_id;
-	//TODO revisar MTM
-	@ManyToMany
-	@JoinColumn(name="libro_id")
-	private List<Libro> libro_id;
-	
+
 	
 	public Valorar() {
 		super();
 	}
 
 
-	public Valorar(int id, Date fecha, String comentario, List<Usuario> usuario_id, List<Libro> libro_id) {
+	public Valorar(int id, Date fecha, String comentario) {
 		super();
 		this.id = id;
 		this.fecha = fecha;
 		this.comentario = comentario;
-		this.usuario_id = usuario_id;
-		this.libro_id = libro_id;
 	}
 
 
@@ -80,24 +69,6 @@ public class Valorar {
 	}
 
 
-	public List<Usuario> getUsuario_id() {
-		return usuario_id;
-	}
-
-
-	public void setUsuario_id(List<Usuario> usuario_id) {
-		this.usuario_id = usuario_id;
-	}
-
-
-	public List<Libro> getLibro_id() {
-		return libro_id;
-	}
-
-
-	public void setLibro_id(List<Libro> libro_id) {
-		this.libro_id = libro_id;
-	}
 	
 	
 	

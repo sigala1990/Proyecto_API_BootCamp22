@@ -95,7 +95,8 @@ public class Libro {
 	}
 
 
-
+	@JsonIgnore
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "Valoracion")
 	public List<Valoracion> getValoracion() {
 		return valoracion;
 	}
@@ -107,7 +108,8 @@ public class Libro {
 	}
 
 
-
+	@JsonIgnore
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "Notificacion")
 	public List<Notificacion> getNotificacion() {
 		return notificacion;
 	}
@@ -192,6 +194,7 @@ public class Libro {
 		this.url_img = url_img;
 	}
 
+
 	public Usuario getUsuario() {
 		return usuario;
 	}
@@ -218,6 +221,8 @@ public class Libro {
 		this.prestacion = prestacion;
 	}
 
+	
+	
 	@Override
 	public String toString() {
 		return "Libro [id=" + id + ", autor=" + autor + ", titulo=" + titulo + ", isbn=" + isbn + ", edad=" + edad

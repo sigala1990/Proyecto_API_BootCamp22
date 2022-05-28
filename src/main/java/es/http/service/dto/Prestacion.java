@@ -4,12 +4,16 @@ import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "prestacion") // en caso que la tabala sea diferente
@@ -57,10 +61,12 @@ public class Prestacion {
 		return usuario_prestacion_id;
 	}
 
+	
 	public void setUsuario_prestacion_id(Usuario usuario_prestacion_id) {
 		this.usuario_prestacion_id = usuario_prestacion_id;
 	}
 
+	
 	public Libro getLibro_prestacion_id() {
 		return libro_prestacion_id;
 	}
