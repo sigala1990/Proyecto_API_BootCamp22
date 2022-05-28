@@ -31,30 +31,19 @@ public class Prestar {
 	@Column(name = "fecha_fin")
 	private Date fecha_fin;
 
-	@ManyToOne
-	@JoinColumn(name = "usuario_id")
-	private Usuario usuario;
-
-	@ManyToOne
-	@JoinColumn(name = "libro_id")
-	private Libro libro;
-
 	@OneToMany
-	@JoinColumn(name = "id") // Referencia a id de Prestar
+	@JoinColumn(name = "prestar_id") // Referencia a id de Prestar
 	private List<Prestacion> prestacion;
 
 	public Prestar() {
 		super();
 	}
 
-	public Prestar(int id, Date fecha_inicio, Date fecha_fin, Usuario usuario, Libro libro,
-			List<Prestacion> prestacion) {
+	public Prestar(int id, Date fecha_inicio, Date fecha_fin,List<Prestacion> prestacion) {
 		super();
 		this.id = id;
 		this.fecha_inicio = fecha_inicio;
 		this.fecha_fin = fecha_fin;
-		this.usuario = usuario;
-		this.libro = libro;
 		this.prestacion = prestacion;
 	}
 
@@ -82,21 +71,6 @@ public class Prestar {
 		this.fecha_fin = fecha_fin;
 	}
 
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
-
-	public Libro getLibro() {
-		return libro;
-	}
-
-	public void setLibro(Libro libro) {
-		this.libro = libro;
-	}
 
 	public void setPrestacion(List<Prestacion> prestacion) {
 		this.prestacion = prestacion;
@@ -110,8 +84,7 @@ public class Prestar {
 
 	@Override
 	public String toString() {
-		return "Prestar [id=" + id + ", fecha_inicio=" + fecha_inicio + ", fecha_fin=" + fecha_fin + ", usuario="
-				+ usuario + ", libro=" + libro + ", prestacion=" + prestacion + "]";
+		return "Prestar [id=" + id + ", fecha_inicio=" + fecha_inicio + ", fecha_fin=" + fecha_fin + ", prestacion=" + prestacion + "]";
 	}
 
 }

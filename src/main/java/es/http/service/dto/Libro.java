@@ -56,16 +56,27 @@ public class Libro {
     Editorial editorial;
     
     @OneToMany
-	@JoinColumn(name = "id") //Referencia a id de Libro
+	@JoinColumn(name = "libro_prestacion_id") //Referencia a id de Libro
 	private List<Prestacion> prestacion;
+    
+    @OneToMany
+	@JoinColumn(name = "libro_id") //Referencia a id de Libro
+	private List<Valoracion> valoracion;
+    
+    @OneToMany
+	@JoinColumn(name = "libro_id") //Referencia a id de Libro
+	private List<Notificacion> notificacion;
     
 	public Libro() {
 		super();
 	}
 
+
+
 	public Libro(int id, String autor, String titulo, String isbn, int edad, String categoria,
 			int duracion_reserva_dias, int cantidad_veces_reservado, String url_img, Usuario usuario,
-			Editorial editorial, List<Prestacion> prestacion) {
+			Editorial editorial, List<Prestacion> prestacion, List<Valoracion> valoracion,
+			List<Notificacion> notificacion) {
 		super();
 		this.id = id;
 		this.autor = autor;
@@ -79,7 +90,35 @@ public class Libro {
 		this.usuario = usuario;
 		this.editorial = editorial;
 		this.prestacion = prestacion;
+		this.valoracion = valoracion;
+		this.notificacion = notificacion;
 	}
+
+
+
+	public List<Valoracion> getValoracion() {
+		return valoracion;
+	}
+
+
+
+	public void setValoracion(List<Valoracion> valoracion) {
+		this.valoracion = valoracion;
+	}
+
+
+
+	public List<Notificacion> getNotificacion() {
+		return notificacion;
+	}
+
+
+
+	public void setNotificacion(List<Notificacion> notificacion) {
+		this.notificacion = notificacion;
+	}
+
+
 
 	public int getId() {
 		return id;

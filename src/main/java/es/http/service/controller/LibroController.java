@@ -53,7 +53,6 @@ public class LibroController {
 		
 		Libro_seleccionado= libroServiceImpl.LibroXID(id);
 		
-		
 		Libro_seleccionado.setAutor(Libro.getAutor());
 		Libro_seleccionado.setTitulo(Libro.getTitulo());
 		Libro_seleccionado.setIsbn(Libro.getIsbn());
@@ -62,6 +61,8 @@ public class LibroController {
 		Libro_seleccionado.setDuracion_reserva_dias(Libro.getDuracion_reserva_dias());
 		Libro_seleccionado.setCantidad_veces_reservado(Libro.getCantidad_veces_reservado());
 		Libro_seleccionado.setUrl_img(Libro.getUrl_img());
+		Libro_seleccionado.setUsuario(Libro.getUsuario());
+		Libro_seleccionado.setEditorial(Libro.getEditorial());
 		
 		Libro_actualizado = libroServiceImpl.actualizarLibro(Libro_seleccionado);
 				

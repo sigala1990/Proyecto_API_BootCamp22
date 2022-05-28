@@ -25,7 +25,7 @@ public class Editorial {
 	private String nombre;
 
 	@OneToMany
-	@JoinColumn(name = "id")
+	@JoinColumn(name = "editorial_id")
 	private List<Libro> libro;
 	
 	public Editorial() {

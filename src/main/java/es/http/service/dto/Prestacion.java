@@ -21,15 +21,17 @@ public class Prestacion {
 	
 	@ManyToOne
 	@JoinColumn(name = "usuario_prestacion_id") 
-	private Usuario usuario_prestacion_id;
+	Usuario usuario_prestacion_id;
 	
 	@ManyToOne
 	@JoinColumn(name = "libro_prestacion_id") 
-	private Libro libro_prestacion_id;
+	Libro libro_prestacion_id;
 	
 	@ManyToOne
     @JoinColumn(name = "prestar_id")
-	private Prestar prestar_id;
+	Prestar prestar_id;
+	
+	
 	
 	public Prestacion() {
 		super();
