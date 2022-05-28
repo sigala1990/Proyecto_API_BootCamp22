@@ -31,23 +31,23 @@ public class ValorarController {
 	public Valorar salvarValorar(@RequestBody Valorar valorar) {
 		
 		return valorarServiceImpl.guardarValorar(valorar);
+
 	}
 	
 	
 	@GetMapping("/valorar/{id}")
-	public Valorar valorarXID(@PathVariable(name="id") int id) {
+	public Valorar ValorarXID(@PathVariable(name="id") int id) {
 		
 		Valorar Valorar_xid= new Valorar();
 		
-		Valorar_xid=valorarServiceImpl.valorarXID(id);
-		
-		//System.out.println("Valorar XID: "+Valorar_xid);
-		
+		Valorar_xid=valorarServiceImpl.ValorarXID(id);
+				
 		return Valorar_xid;
 	}
 	
 	@PutMapping("/valorar/{id}")
 	public Valorar actualizarValorar(@PathVariable(name="id")int id,@RequestBody Valorar valorar) {
+
 		
 		Valorar Valorar_seleccionado= new Valorar();
 		Valorar Valorar_actualizado= new Valorar();
@@ -56,12 +56,8 @@ public class ValorarController {
 		
 		Valorar_seleccionado.setFecha(valorar.getFecha());
 		Valorar_seleccionado.setComentario(valorar.getComentario());
-		Valorar_seleccionado.setLibro_id(valorar.getLibro_id());
-		Valorar_seleccionado.setUsuario_id(valorar.getUsuario_id());
-		
+
 		Valorar_actualizado = valorarServiceImpl.actualizarValorar(Valorar_seleccionado);
-		
-		//System.out.println("El Valorar actualizado es: "+ Valorar_actualizado);
 		
 		return Valorar_actualizado;
 	}

@@ -22,26 +22,54 @@ public class Notificar {
 	private String mensaje;
 	@Column(name="fecha")
 	private Date fecha;
+	@Column(name ="estado")
+	private int estado;
+	@Column(name ="titulo_libro")
+	private String titulo_libro;
+	
 	//TODO revisar @ManyToMany
-	@ManyToMany
+/*	@ManyToMany
 	@JoinColumn(name="usuario_emisor_id")
 	Usuario usuario_emisor_id;
 	
 	@ManyToMany
 	@JoinColumn(name="usuario_receptor_id")
 	Usuario usuario_receptor_id;
-
+*/
 	public Notificar() {
 		super();
 	}
 
-	public Notificar(int id, String mensaje, Date fecha, Usuario usuario_emisor_id, Usuario usuario_receptor_id) {
+
+
+	public Notificar(int id, String mensaje, Date fecha, int estado, String titulo_libro/*, Usuario usuario_emisor_id,
+			Usuario usuario_receptor_id*/) {
 		super();
 		this.id = id;
 		this.mensaje = mensaje;
 		this.fecha = fecha;
-		this.usuario_emisor_id = usuario_emisor_id;
-		this.usuario_receptor_id = usuario_receptor_id;
+		this.estado = estado;
+		this.titulo_libro = titulo_libro;
+	/*	this.usuario_emisor_id = usuario_emisor_id;
+		this.usuario_receptor_id = usuario_receptor_id;*/
+	}
+
+
+
+	public int getEstado() {
+		return estado;
+	}
+
+	public void setEstado(int estado) {
+		this.estado = estado;
+	}
+
+	public String getTitulo_libro() {
+		return titulo_libro;
+	}
+
+	public void setTitulo_libro(String titulo_libro) {
+		this.titulo_libro = titulo_libro;
 	}
 
 	public int getId() {
@@ -67,7 +95,7 @@ public class Notificar {
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
 	}
-
+/*
 	public Usuario getUsuario_emisor_id() {
 		return usuario_emisor_id;
 	}
@@ -83,6 +111,6 @@ public class Notificar {
 	public void setUsuario_receptor_id(Usuario usuario_receptor_id) {
 		this.usuario_receptor_id = usuario_receptor_id;
 	}
-	
+	*/
 	
 }

@@ -20,6 +20,7 @@ public class Valorar {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
+
 	@Column(name = "fecha")
 	private Date fecha;
 	@Column(name ="comentario")
@@ -97,7 +98,6 @@ public class Valorar {
 	public void setLibro_id(List<Libro> libro_id) {
 		this.libro_id = libro_id;
 	}
-	
 	
 	
 	
