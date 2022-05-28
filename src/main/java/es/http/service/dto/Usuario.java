@@ -24,24 +24,50 @@ public class Usuario {
 	private String email;
 
 	// TODO añadir campos Usuario/password/rol
+	/*@Column(name ="username")
+	private String username;
+	@Column(name ="password")
+	private String password;
+	@Column(name ="role")
+	private String role;
+	*/
 	
 	@OneToMany
-	@JoinColumn(name = "id")
+	@JoinColumn(name = "usuario_id")
 	private List<Libro> libros;
+	
+	@OneToMany
+	@JoinColumn(name ="usuario_id")
+	private List<Valoracion> valoracion;
+	
+	@OneToMany
+	@JoinColumn(name ="usuario_prestacion_id")
+	private List<Prestacion> prestacion;
+	
+	@OneToMany
+	@JoinColumn(name ="usuario_emisor_id")
+	private List<Notificacion> notificacion_emisor;
+	
+	@OneToMany
+	@JoinColumn(name ="usuario_receptor_id")
+	private List<Notificacion> notificacion_receptor;
 
-	// TODO relacion notificar
-
-	// TODO relacion valorar
 	public Usuario() {
 		super();
 	}
 
-	public Usuario(int id, String nombre, String email, List<Libro> libros) {
+	public Usuario(int id, String nombre, String email, List<Libro> libros, List<Valoracion> valoracion,
+			List<Prestacion> prestacion, List<Notificacion> notificacion_emisor,
+			List<Notificacion> notificacion_receptor) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.email = email;
 		this.libros = libros;
+		this.valoracion = valoracion;
+		this.prestacion = prestacion;
+		this.notificacion_emisor = notificacion_emisor;
+		this.notificacion_receptor = notificacion_receptor;
 	}
 
 	public int getId() {
@@ -75,5 +101,42 @@ public class Usuario {
 	public void setLibros(List<Libro> libros) {
 		this.libros = libros;
 	}
+
+	public List<Valoracion> getValoracion() {
+		return valoracion;
+	}
+
+	public void setValoracion(List<Valoracion> valoracion) {
+		this.valoracion = valoracion;
+	}
+
+	public List<Prestacion> getPrestacion() {
+		return prestacion;
+	}
+
+	public void setPrestacion(List<Prestacion> prestacion) {
+		this.prestacion = prestacion;
+	}
+
+	public List<Notificacion> getNotificacion_emisor() {
+		return notificacion_emisor;
+	}
+
+	public void setNotificacion_emisor(List<Notificacion> notificacion_emisor) {
+		this.notificacion_emisor = notificacion_emisor;
+	}
+
+	public List<Notificacion> getNotificacion_receptor() {
+		return notificacion_receptor;
+	}
+
+	public void setNotificacion_receptor(List<Notificacion> notificacion_receptor) {
+		this.notificacion_receptor = notificacion_receptor;
+	}
+	
+	
+	
+
+	
  
 }
