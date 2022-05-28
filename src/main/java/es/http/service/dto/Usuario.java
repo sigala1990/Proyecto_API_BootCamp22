@@ -56,9 +56,11 @@ public class Usuario {
 		super();
 	}
 
+
 	public Usuario(int id, String nombre, String email, List<Libro> libros, List<Valoracion> valoracion,
 			List<Prestacion> prestacion, List<Notificacion> notificacion_emisor,
 			List<Notificacion> notificacion_receptor) {
+
 		super();
 		this.id = id;
 		this.nombre = nombre;
@@ -68,6 +70,7 @@ public class Usuario {
 		this.prestacion = prestacion;
 		this.notificacion_emisor = notificacion_emisor;
 		this.notificacion_receptor = notificacion_receptor;
+
 	}
 
 	public int getId() {
@@ -94,9 +97,6 @@ public class Usuario {
 		this.email = email;
 	}
 
-	public List<Libro> getLibros() {
-		return libros;
-	}
 
 	public void setLibros(List<Libro> libros) {
 		this.libros = libros;
