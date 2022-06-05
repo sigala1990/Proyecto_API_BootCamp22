@@ -3,12 +3,16 @@ package es.http.service.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import es.http.service.DAO.IUsuarioDAO;
 import es.http.service.dto.Usuario;
 @Service
-public class UsuarioServiceImpl implements IUsuarioService {
+public class UsuarioServiceImpl implements IUsuarioService, UserDetailsService {
 	@Autowired
 	IUsuarioDAO iUsuarioDAO;
 
@@ -36,5 +40,14 @@ public class UsuarioServiceImpl implements IUsuarioService {
 	public void eliminarUsuario(int id) {
 		iUsuarioDAO.deleteById(id);
 	}
-	
+
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		Usuario usuario = iUsuarioDAO.findByUsername(username);
+		if (usuario == null) {
+			throw new UsernameNotFoundException(username);
+		}
+
+		return new User(usuario.getUsername(), usuario.getPassword(), usuario.getAuthorities());
+	}
 }
