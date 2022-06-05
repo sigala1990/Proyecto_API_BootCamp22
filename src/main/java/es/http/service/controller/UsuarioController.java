@@ -57,6 +57,12 @@ public class UsuarioController {
 		
 		Usuario_seleccionado.setNombre(usuario.getNombre());
 		Usuario_seleccionado.setEmail(usuario.getEmail());
+		Usuario_seleccionado.setPassword(usuario.getPassword());
+		Usuario_seleccionado.setEdad(usuario.getEdad());
+		Usuario_seleccionado.setRole(usuario.getRole());
+		Usuario_seleccionado.setUrl_imagen(usuario.getUrl_imagen());
+		Usuario_seleccionado.setActivo(usuario.getActivo());
+		
 		
 		Usuario_actualizado = usuarioServiceImpl.actualizarUsuario(Usuario_seleccionado);
 		

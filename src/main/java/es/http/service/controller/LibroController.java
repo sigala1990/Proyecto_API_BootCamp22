@@ -63,6 +63,9 @@ public class LibroController {
 		Libro_seleccionado.setUrl_img(Libro.getUrl_img());
 		Libro_seleccionado.setUsuario(Libro.getUsuario());
 		Libro_seleccionado.setEditorial(Libro.getEditorial());
+		Libro_seleccionado.setDescripcion(Libro.getDescripcion());
+		Libro_seleccionado.setDisponible(Libro.getDisponible());
+		
 		
 		Libro_actualizado = libroServiceImpl.actualizarLibro(Libro_seleccionado);
 				
