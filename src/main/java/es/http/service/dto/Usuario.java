@@ -26,14 +26,20 @@ public class Usuario {
 	@Column(name = "email")
 	private String email;
 
-	// TODO añadir campos Usuario/password/rol
-	/*@Column(name ="username")
-	private String username;
 	@Column(name ="password")
 	private String password;
 	@Column(name ="role")
 	private String role;
-	*/
+	
+	@Column(name ="edad")
+	private String edad;
+	
+	@Column(name ="url_imagen")
+	private String url_imagen;
+	
+	@Column(name ="activo")
+	private String activo;
+	
 	
 	@OneToMany
 	@JoinColumn(name = "usuario_id")
@@ -60,21 +66,75 @@ public class Usuario {
 	}
 
 
-	public Usuario(int id, String nombre, String email, List<Libro> libros, List<Valoracion> valoracion,
-			List<Prestacion> prestacion, List<Notificacion> notificacion_emisor,
-			List<Notificacion> notificacion_receptor) {
-
+	public Usuario(int id, String nombre, String email, String password, String role, String edad, String url_imagen,
+			String activo, List<Libro> libros, List<Valoracion> valoracion, List<Prestacion> prestacion,
+			List<Notificacion> notificacion_emisor, List<Notificacion> notificacion_receptor) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.email = email;
+		this.password = password;
+		this.role = role;
+		this.edad = edad;
+		this.url_imagen = url_imagen;
+		this.activo = activo;
 		this.libros = libros;
 		this.valoracion = valoracion;
 		this.prestacion = prestacion;
 		this.notificacion_emisor = notificacion_emisor;
 		this.notificacion_receptor = notificacion_receptor;
-
 	}
+
+
+	public String getPassword() {
+		return password;
+	}
+
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+
+	public String getRole() {
+		return role;
+	}
+
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+
+	public String getEdad() {
+		return edad;
+	}
+
+
+	public void setEdad(String edad) {
+		this.edad = edad;
+	}
+
+
+	public String getUrl_imagen() {
+		return url_imagen;
+	}
+
+
+	public void setUrl_imagen(String url_imagen) {
+		this.url_imagen = url_imagen;
+	}
+
+
+	public String getActivo() {
+		return activo;
+	}
+
+
+	public void setActivo(String activo) {
+		this.activo = activo;
+	}
+
 
 	public int getId() {
 		return id;

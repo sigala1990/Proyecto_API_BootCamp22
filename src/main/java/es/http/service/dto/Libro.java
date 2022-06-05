@@ -47,6 +47,13 @@ public class Libro {
 	@Column(name = "url_img") // no hace falta si se llama igual
 	private String url_img;
 	
+	@Column(name = "descripcion") // no hace falta si se llama igual
+	private String descripcion;
+	
+	@Column(name = "disponible") // no hace falta si se llama igual
+	private String disponible;
+	
+	
 	@ManyToOne
     @JoinColumn(name = "usuario_id")
     Usuario usuario;
@@ -70,13 +77,11 @@ public class Libro {
 	public Libro() {
 		super();
 	}
-
-
-
+	
 	public Libro(int id, String autor, String titulo, String isbn, int edad, String categoria,
-			int duracion_reserva_dias, int cantidad_veces_reservado, String url_img, Usuario usuario,
-			Editorial editorial, List<Prestacion> prestacion, List<Valoracion> valoracion,
-			List<Notificacion> notificacion) {
+			int duracion_reserva_dias, int cantidad_veces_reservado, String url_img, String descripcion,
+			String disponible, Usuario usuario, Editorial editorial, List<Prestacion> prestacion,
+			List<Valoracion> valoracion, List<Notificacion> notificacion) {
 		super();
 		this.id = id;
 		this.autor = autor;
@@ -87,6 +92,8 @@ public class Libro {
 		this.duracion_reserva_dias = duracion_reserva_dias;
 		this.cantidad_veces_reservado = cantidad_veces_reservado;
 		this.url_img = url_img;
+		this.descripcion = descripcion;
+		this.disponible = disponible;
 		this.usuario = usuario;
 		this.editorial = editorial;
 		this.prestacion = prestacion;
@@ -94,6 +101,23 @@ public class Libro {
 		this.notificacion = notificacion;
 	}
 
+
+
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+
+	public String getDisponible() {
+		return disponible;
+	}
+
+	public void setDisponible(String disponible) {
+		this.disponible = disponible;
+	}
 
 	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "Valoracion")
@@ -194,7 +218,8 @@ public class Libro {
 		this.url_img = url_img;
 	}
 
-
+	/*@JsonIgnore
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "Usuario")*/
 	public Usuario getUsuario() {
 		return usuario;
 	}

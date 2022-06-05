@@ -36,4 +36,5 @@ public class UsuarioServiceImpl implements IUsuarioService {
 	public void eliminarUsuario(int id) {
 		iUsuarioDAO.deleteById(id);
 	}
+	
 }
