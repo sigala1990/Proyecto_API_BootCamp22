@@ -4,24 +4,6 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
-<<<<<<< HEAD
-### STS ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
-
-.application.properties
-### IntelliJ IDEA ###
-.idea
-*.iws
-*.iml
-*.ipr
-src/main/resources/application.properties
-=======
 
 ### STS ###
 .apt_generated
@@ -33,13 +15,12 @@ src/main/resources/application.properties
 .sts4-cache
 .metadata
 /bin/
-
+src/main/resources/application.properties
 ### IntelliJ IDEA ###
 .idea
 *.iws
 *.iml
 *.ipr
->>>>>>> branch 'development' of https://github.com/sigala1990/Proyecto_API_BootCamp22.git
 
 ### NetBeans ###
 /nbproject/private/

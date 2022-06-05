@@ -1,9 +1,13 @@
 package es.http.service.dto;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,24 +16,29 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "usuario")
-public class Usuario {
+public class Usuario implements UserDetails{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	@Column(name = "nombre")
-	private String nombre;
+	@Column(name = "username")
+	private String username;
 	@Column(name = "email")
 	private String email;
 
 	@Column(name ="password")
 	private String password;
+	@Enumerated(EnumType.STRING)
 	@Column(name ="role")
-	private String role;
+	private Role role;
 	
 	@Column(name ="edad")
 	private String edad;
@@ -61,17 +70,24 @@ public class Usuario {
 	@JoinColumn(name ="usuario_receptor_id")
 	private List<Notificacion> notificacion_receptor;
 
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities(){
+		List<GrantedAuthority> roles = new ArrayList<>();
+		roles.add(new SimpleGrantedAuthority(role.toString()));
+		return roles;
+	}
+	
 	public Usuario() {
 		super();
 	}
 
 
-	public Usuario(int id, String nombre, String email, String password, String role, String edad, String url_imagen,
+	public Usuario(int id, String username, String email, String password, Role role, String edad, String url_imagen,
 			String activo, List<Libro> libros, List<Valoracion> valoracion, List<Prestacion> prestacion,
 			List<Notificacion> notificacion_emisor, List<Notificacion> notificacion_receptor) {
 		super();
 		this.id = id;
-		this.nombre = nombre;
+		this.username = username;
 		this.email = email;
 		this.password = password;
 		this.role = role;
@@ -96,15 +112,14 @@ public class Usuario {
 	}
 
 
-	public String getRole() {
+
+	public Role getRole() {
 		return role;
 	}
 
-
-	public void setRole(String role) {
+	public void setRole(Role role) {
 		this.role = role;
 	}
-
 
 	public String getEdad() {
 		return edad;
@@ -144,12 +159,12 @@ public class Usuario {
 		this.id = id;
 	}
 
-	public String getNombre() {
-		return nombre;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setUserName(String nombre) {
+		this.username = nombre;
 	}
 
 	public String getEmail() {
@@ -215,8 +230,33 @@ public class Usuario {
 	
 	@Override
 	public String toString() {
-		return "Usuario [id=" + id + ", nombre=" + nombre + ", email=" + email + ", libros=" + libros + ", prestacion="
+		return "Usuario [id=" + id + ", nombre=" + username + ", email=" + email + ", libros=" + libros + ", prestacion="
 				+ prestacion + "]";
+	}
+
+
+	@Override
+	public boolean isAccountNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		// TODO Auto-generated method stub
+		return true;
 	}
  
 }
