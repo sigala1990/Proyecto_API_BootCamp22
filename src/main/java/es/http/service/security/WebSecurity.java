@@ -1,6 +1,11 @@
 package es.http.service.security;
 
 import static es.http.service.security.Constants.LOGIN_URL;
+import static es.http.service.security.Constants.SWAGGER_RESOURCES;
+import static es.http.service.security.Constants.SWAGGER_UI_HTML;
+import static es.http.service.security.Constants.SWAGGER_API_DOCS;
+import static es.http.service.security.Constants.SWAGGER_UI;
+import static es.http.service.security.Constants.SWAGGER_WEBJARS;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -59,11 +64,11 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 			.cors().and()
 			.csrf().disable()
 			.authorizeRequests().antMatchers(HttpMethod.POST, LOGIN_URL).permitAll()
-								.antMatchers("/swagger-resources/**").permitAll()
-								.antMatchers("/swagger-ui.html").permitAll()
-								.antMatchers("/v3/api-docs").permitAll()
-								.antMatchers("/swagger-ui/**").permitAll()
-								.antMatchers("/webjars/**").permitAll()
+								.antMatchers(SWAGGER_RESOURCES).permitAll()
+								.antMatchers(SWAGGER_UI_HTML).permitAll()
+								.antMatchers(SWAGGER_API_DOCS).permitAll()
+								.antMatchers(SWAGGER_UI).permitAll()
+								.antMatchers(SWAGGER_WEBJARS).permitAll()
 			//.antMatchers("/api/usuario").hasAuthority("ADMIN")
 			//.antMatchers("/api/facultad").hasAuthority("ADMIN")
 			.anyRequest().authenticated()
