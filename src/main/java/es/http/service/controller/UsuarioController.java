@@ -3,6 +3,10 @@ package es.http.service.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,33 +14,57 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import es.http.service.DAO.IUsuarioDAO;
 import es.http.service.dto.Usuario;
 import es.http.service.services.UsuarioServiceImpl;
 
 @RestController
-@RequestMapping("/api")
+@CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT,RequestMethod.DELETE})
 public class UsuarioController {
 
+	private IUsuarioDAO iUsuarioDAO;
+
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+	public UsuarioController(IUsuarioDAO iUsuarioDAO, BCryptPasswordEncoder bCryptPasswordEncoder) {
+		this.iUsuarioDAO = iUsuarioDAO;
+		this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+	}
 	@Autowired
 	UsuarioServiceImpl usuarioServiceImpl;
 	
+	@GetMapping("/response-entity-builder-with-http-headers")
+	public ResponseEntity<String> usingResponseEntityBuilderAndHttpHeaders() {
+	    HttpHeaders responseHeaders = new HttpHeaders();
+	    responseHeaders.set("Baeldung-Example-Header", 
+	      "Value-ResponseEntityBuilderWithHttpHeaders");
+
+	    return ResponseEntity.ok()
+	      .headers(responseHeaders)
+	      .body("Response with header using ResponseEntity");
+	}
+	
 	@GetMapping("/usuario")
-	public List<Usuario> listarCusuarios(){
+	public List<Usuario> listarUsuarios(){
 		return usuarioServiceImpl.listarUsuario();
 	}
 	
 
 	@PostMapping("/usuario")
 	public Usuario salvarUsuario(@RequestBody Usuario usuario) {
+		usuario.setPassword(bCryptPasswordEncoder.encode(usuario.getPassword()));
+		iUsuarioDAO.save(usuario);
 		
-		return usuarioServiceImpl.guardarUsuario(usuario);
+		return usuario;
 	}
 	
 	
 	@GetMapping("/usuario/{id}")
 	public Usuario usuarioXID(@PathVariable(name="id") int id) {
+		
 		
 		Usuario Usuario_xid= new Usuario();
 		
@@ -55,8 +83,14 @@ public class UsuarioController {
 		
 		Usuario_seleccionado= usuarioServiceImpl.usuarioXID(id);
 		
-		Usuario_seleccionado.setNombre(usuario.getNombre());
+		Usuario_seleccionado.setUserName(usuario.getUsername());
 		Usuario_seleccionado.setEmail(usuario.getEmail());
+		Usuario_seleccionado.setPassword(usuario.getPassword());
+		Usuario_seleccionado.setEdad(usuario.getEdad());
+		Usuario_seleccionado.setRole(usuario.getRole());
+		Usuario_seleccionado.setUrl_imagen(usuario.getUrl_imagen());
+		Usuario_seleccionado.setActivo(usuario.getActivo());
+		
 		
 		Usuario_actualizado = usuarioServiceImpl.actualizarUsuario(Usuario_seleccionado);
 		

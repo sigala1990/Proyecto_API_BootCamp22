@@ -9,10 +9,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import es.http.service.dto.Notificar;
 import es.http.service.services.NotificarServiceImpl;
 
+@RestController
+@RequestMapping("/api")
 public class NotificarController {
 
 	@Autowired
@@ -53,8 +57,7 @@ public class NotificarController {
 		
 		Notificar_seleccionado.setFecha(notificar.getFecha());
 		Notificar_seleccionado.setMensaje(notificar.getMensaje());
-		Notificar_seleccionado.setUsuario_emisor_id(notificar.getUsuario_emisor_id());
-		Notificar_seleccionado.setUsuario_receptor_id(notificar.getUsuario_receptor_id());
+		Notificar_seleccionado.setEstado(notificar.getEstado());
 		
 		Notificar_actualizado = notificarServiceImpl.actualizarNotificar(Notificar_seleccionado);
 		

@@ -1,15 +1,19 @@
 package es.http.service.dto;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="notificar")
@@ -20,28 +24,26 @@ public class Notificar {
 	private int id;
 	@Column(name="mensaje")
 	private String mensaje;
+	@Column(name="estado")
+	private int estado;
 	@Column(name="fecha")
 	private Date fecha;
-	//TODO revisar @ManyToMany
-	@ManyToMany
-	@JoinColumn(name="usuario_emisor_id")
-	Usuario usuario_emisor_id;
 	
-	@ManyToMany
-	@JoinColumn(name="usuario_receptor_id")
-	Usuario usuario_receptor_id;
-
+	@OneToMany
+	@JoinColumn(name="notificar_id")
+	private List<Notificacion> notificacion;
+	
 	public Notificar() {
 		super();
 	}
 
-	public Notificar(int id, String mensaje, Date fecha, Usuario usuario_emisor_id, Usuario usuario_receptor_id) {
+	public Notificar(int id, String mensaje, int estado, Date fecha, List<Notificacion> notificacion) {
 		super();
 		this.id = id;
 		this.mensaje = mensaje;
+		this.estado = estado;
 		this.fecha = fecha;
-		this.usuario_emisor_id = usuario_emisor_id;
-		this.usuario_receptor_id = usuario_receptor_id;
+		this.notificacion = notificacion;
 	}
 
 	public int getId() {
@@ -60,6 +62,14 @@ public class Notificar {
 		this.mensaje = mensaje;
 	}
 
+	public int getEstado() {
+		return estado;
+	}
+
+	public void setEstado(int estado) {
+		this.estado = estado;
+	}
+
 	public Date getFecha() {
 		return fecha;
 	}
@@ -67,22 +77,16 @@ public class Notificar {
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
 	}
-
-	public Usuario getUsuario_emisor_id() {
-		return usuario_emisor_id;
+	@JsonIgnore
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "Notificacion")
+	public List<Notificacion> getNotificacion() {
+		return notificacion;
 	}
 
-	public void setUsuario_emisor_id(Usuario usuario_emisor_id) {
-		this.usuario_emisor_id = usuario_emisor_id;
+	public void setNotificacion(List<Notificacion> notificacion) {
+		this.notificacion = notificacion;
 	}
 
-	public Usuario getUsuario_receptor_id() {
-		return usuario_receptor_id;
-	}
 
-	public void setUsuario_receptor_id(Usuario usuario_receptor_id) {
-		this.usuario_receptor_id = usuario_receptor_id;
-	}
-	
-	
+
 }

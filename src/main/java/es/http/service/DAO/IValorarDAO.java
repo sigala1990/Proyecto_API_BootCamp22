@@ -1,5 +1,9 @@
 package es.http.service.DAO;
 
-public class IValorarDAO {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import es.http.service.dto.Valorar;
+
+public interface IValorarDAO extends JpaRepository<Valorar, Integer>{
 
 }
