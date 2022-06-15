@@ -16,6 +16,7 @@ target/
 .metadata
 /bin/
 src/main/resources/application.properties
+src/main/java/es/http/service/security/Constants.java
 ### IntelliJ IDEA ###
 .idea
 *.iws
