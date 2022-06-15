@@ -1,5 +1,6 @@
 package es.http.service.dto;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -41,7 +42,7 @@ public class Usuario implements UserDetails{
 	private Role role;
 	
 	@Column(name ="edad")
-	private String edad;
+	private Date edad;
 	
 	@Column(name ="url_imagen")
 	private String url_imagen;
@@ -49,6 +50,7 @@ public class Usuario implements UserDetails{
 	@Column(name ="activo")
 	private String activo;
 	
+		
 	
 	@OneToMany
 	@JoinColumn(name = "usuario_id")
@@ -82,7 +84,7 @@ public class Usuario implements UserDetails{
 	}
 
 
-	public Usuario(int id, String username, String email, String password, Role role, String edad, String url_imagen,
+	public Usuario(int id, String username, String email, String password, Role role, Date edad, String url_imagen,
 			String activo, List<Libro> libros, List<Valoracion> valoracion, List<Prestacion> prestacion,
 			List<Notificacion> notificacion_emisor, List<Notificacion> notificacion_receptor) {
 		super();
@@ -121,12 +123,12 @@ public class Usuario implements UserDetails{
 		this.role = role;
 	}
 
-	public String getEdad() {
+	public Date getEdad() {
 		return edad;
 	}
 
 
-	public void setEdad(String edad) {
+	public void setEdad(Date edad) {
 		this.edad = edad;
 	}
 

@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,12 +23,16 @@ public class Intercambiar {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	
 	@Column(name = "fecha_solicitud")
 	private String fecha_solicitud;
+	
 	@Column(name = "fecha_estado_final")
 	private String fecha_estado_final;
-	@Column(name = "estado")
-	private String estado;
+	
+	@Enumerated(EnumType.STRING)
+	@Column(name ="estado")
+	private Estado estado;
 	
 	@OneToMany
 	@JoinColumn(name = "intercambiar_id")
@@ -36,7 +42,7 @@ public class Intercambiar {
 		super();
 	}
 
-	public Intercambiar(int id, String fecha_solicitud, String fecha_estado_final, String estado,
+	public Intercambiar(int id, String fecha_solicitud, String fecha_estado_final, Estado estado,
 			List<Intercambio> intercambio) {
 		super();
 		this.id = id;
@@ -70,11 +76,11 @@ public class Intercambiar {
 		this.fecha_estado_final = fecha_estado_final;
 	}
 
-	public String getEstado() {
+	public Estado getEstado() {
 		return estado;
 	}
 
-	public void setEstado(String estado) {
+	public void setEstado(Estado estado) {
 		this.estado = estado;
 	}
 	@JsonIgnore

@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -24,10 +26,26 @@ public class Valorar {
 	private Date fecha;
 	@Column(name ="comentario")
 	private String comentario;
-
+	
+	@Enumerated(EnumType.STRING)
+	@Column(name ="estrellas")
+	private Estrellas estrellas;
+	
+	/*@Enumerated(EnumType.STRING)
+	@Column(name ="role")
+	private Role role;*/
 	
 	public Valorar() {
 		super();
+	}
+
+
+	public Valorar(int id, Date fecha, String comentario, Estrellas estrellas) {
+		super();
+		this.id = id;
+		this.fecha = fecha;
+		this.comentario = comentario;
+		this.estrellas = estrellas;
 	}
 
 
@@ -36,6 +54,16 @@ public class Valorar {
 		this.id = id;
 		this.fecha = fecha;
 		this.comentario = comentario;
+	}
+
+
+	public Estrellas getEstrellas() {
+		return estrellas;
+	}
+
+
+	public void setEstrellas(Estrellas estrellas) {
+		this.estrellas = estrellas;
 	}
 
 
