@@ -54,6 +54,7 @@ public class ValorarController {
 		
 		Valorar_seleccionado= valorarServiceImpl.valorarXID(id);
 		
+		Valorar_seleccionado.setEstrellas(valorar.getEstrellas());
 		Valorar_seleccionado.setFecha(valorar.getFecha());
 		Valorar_seleccionado.setComentario(valorar.getComentario());
 

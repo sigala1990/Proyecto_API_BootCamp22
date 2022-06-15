@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -31,6 +33,13 @@ public class Prestar {
 	@Column(name = "fecha_fin")
 	private Date fecha_fin;
 
+	@Enumerated(EnumType.STRING)
+	@Column(name ="estado")
+	private Estado estado;
+	
+	@Column(name ="duracion_reserva")
+	private int duracion_reserva;
+	
 	@OneToMany
 	@JoinColumn(name = "prestar_id") // Referencia a id de Prestar
 	private List<Prestacion> prestacion;
@@ -39,13 +48,38 @@ public class Prestar {
 		super();
 	}
 
-	public Prestar(int id, Date fecha_inicio, Date fecha_fin,List<Prestacion> prestacion) {
+
+	public Prestar(int id, Date fecha_inicio, Date fecha_fin, Estado estado, int duracion_reserva,
+			List<Prestacion> prestacion) {
 		super();
 		this.id = id;
 		this.fecha_inicio = fecha_inicio;
 		this.fecha_fin = fecha_fin;
+		this.estado = estado;
+		this.duracion_reserva = duracion_reserva;
 		this.prestacion = prestacion;
 	}
+
+
+	public Estado getEstado() {
+		return estado;
+	}
+
+
+	public void setEstado(Estado estado) {
+		this.estado = estado;
+	}
+
+
+	public int getDuracion_reserva() {
+		return duracion_reserva;
+	}
+
+
+	public void setDuracion_reserva(int duracion_reserva) {
+		this.duracion_reserva = duracion_reserva;
+	}
+
 
 	public int getId() {
 		return id;

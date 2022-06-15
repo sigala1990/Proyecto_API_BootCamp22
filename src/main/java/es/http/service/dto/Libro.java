@@ -37,10 +37,7 @@ public class Libro {
 	
 	@Column(name = "categoria") // no hace falta si se llama igual
 	private String categoria;
-	
-	@Column(name = "duracion_reserva_dias") // no hace falta si se llama igual
-	private int duracion_reserva_dias;
-	
+		
 	@Column(name = "cantidad_veces_reservado") // no hace falta si se llama igual
 	private int cantidad_veces_reservado;
 	
@@ -79,7 +76,7 @@ public class Libro {
 	}
 	
 	public Libro(int id, String autor, String titulo, String isbn, int edad, String categoria,
-			int duracion_reserva_dias, int cantidad_veces_reservado, String url_img, String descripcion,
+			int cantidad_veces_reservado, String url_img, String descripcion,
 			String disponible, Usuario usuario, Editorial editorial, List<Prestacion> prestacion,
 			List<Valoracion> valoracion, List<Notificacion> notificacion) {
 		super();
@@ -89,7 +86,6 @@ public class Libro {
 		this.isbn = isbn;
 		this.edad = edad;
 		this.categoria = categoria;
-		this.duracion_reserva_dias = duracion_reserva_dias;
 		this.cantidad_veces_reservado = cantidad_veces_reservado;
 		this.url_img = url_img;
 		this.descripcion = descripcion;
@@ -194,13 +190,7 @@ public class Libro {
 		this.categoria = categoria;
 	}
 
-	public int getDuracion_reserva_dias() {
-		return duracion_reserva_dias;
-	}
 
-	public void setDuracion_reserva_dias(int duracion_reserva_dias) {
-		this.duracion_reserva_dias = duracion_reserva_dias;
-	}
 
 	public int getCantidad_veces_reservado() {
 		return cantidad_veces_reservado;
@@ -251,8 +241,7 @@ public class Libro {
 	@Override
 	public String toString() {
 		return "Libro [id=" + id + ", autor=" + autor + ", titulo=" + titulo + ", isbn=" + isbn + ", edad=" + edad
-				+ ", categoria=" + categoria + ", duracion_reserva_dias=" + duracion_reserva_dias
-				+ ", cantidad_veces_reservado=" + cantidad_veces_reservado + ", url_img=" + url_img + ", usuario="
+				+ ", categoria=" + categoria +  "cantidad_veces_reservado=" + cantidad_veces_reservado + ", url_img=" + url_img + ", usuario="
 				+ usuario + ", editorial=" + editorial + ", prestacion=" + prestacion + "]";
 	}
 	

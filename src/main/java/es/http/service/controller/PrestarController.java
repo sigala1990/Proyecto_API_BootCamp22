@@ -56,6 +56,9 @@ public class PrestarController {
 		
 		Prestar_seleccionado.setFecha_inicio(Prestar.getFecha_inicio());
 		Prestar_seleccionado.setFecha_fin(Prestar.getFecha_fin());
+		Prestar_seleccionado.setDuracion_reserva(Prestar.getDuracion_reserva());
+		Prestar_seleccionado.setEstado(Prestar.getEstado());
+		
 		
 		Prestar_actualizado = prestarServiceImpl.actualizarPrestar(Prestar_seleccionado);
 				

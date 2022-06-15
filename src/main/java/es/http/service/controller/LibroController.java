@@ -29,7 +29,8 @@ public class LibroController {
 		return libroServiceImpl.listarLibro();
 	}
 	
-	
+
+	@PreAuthorize("hasAnyAuthority('ADMIN')")
 	@PostMapping("/libro")
 	public Libro salvarLibro(@RequestBody Libro Libro) {
 		
@@ -60,7 +61,7 @@ public class LibroController {
 		Libro_seleccionado.setIsbn(Libro.getIsbn());
 		Libro_seleccionado.setEdad(Libro.getEdad());
 		Libro_seleccionado.setCategoria(Libro.getCategoria());
-		Libro_seleccionado.setDuracion_reserva_dias(Libro.getDuracion_reserva_dias());
+
 		Libro_seleccionado.setCantidad_veces_reservado(Libro.getCantidad_veces_reservado());
 		Libro_seleccionado.setUrl_img(Libro.getUrl_img());
 		Libro_seleccionado.setUsuario(Libro.getUsuario());
