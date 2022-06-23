@@ -1,5 +1,6 @@
 package es.http.service.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,6 +52,13 @@ public class UsuarioController {
 	@GetMapping("/usuario")
 	public List<Usuario> listarUsuarios(){
 		return usuarioServiceImpl.listarUsuario();
+	}
+	
+	@GetMapping("/usuario/username/{username}")
+	@PreAuthorize("hasAnyAuthority('ADMIN','USER')")
+	public Usuario listarCogerNombreUsuarios(@PathVariable(name="username") String username){
+		
+		return usuarioServiceImpl.buscarByUsername(username);
 	}
 	
 	@PostMapping("/usuario")
