@@ -3,6 +3,7 @@ package es.http.service.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,12 +24,14 @@ public class NotificarController {
 	NotificarServiceImpl notificarServiceImpl;
 	
 	@GetMapping("/notificar")
+	@PreAuthorize("hasAnyAuthority('ADMIN','USER')")
 	public List<Notificar> listarCnotificars(){
 		return notificarServiceImpl.listarNotificar();
 	}
 	
 
 	@PostMapping("/notificar")
+	@PreAuthorize("hasAnyAuthority('ADMIN','USER')")
 	public Notificar salvarNotificar(@RequestBody Notificar notificar) {
 		
 		return notificarServiceImpl.guardarNotificar(notificar);
@@ -36,6 +39,7 @@ public class NotificarController {
 	
 	
 	@GetMapping("/notificar/{id}")
+	@PreAuthorize("hasAnyAuthority('ADMIN','USER')")
 	public Notificar notificarXID(@PathVariable(name="id") int id) {
 		
 		Notificar Notificar_xid= new Notificar();
@@ -48,6 +52,7 @@ public class NotificarController {
 	}
 	
 	@PutMapping("/notificar/{id}")
+	@PreAuthorize("hasAnyAuthority('ADMIN','USER')")
 	public Notificar actualizarNotificar(@PathVariable(name="id")int id,@RequestBody Notificar notificar) {
 		
 		Notificar Notificar_seleccionado= new Notificar();
@@ -67,6 +72,7 @@ public class NotificarController {
 	}
 	
 	@DeleteMapping("/notificar/{id}")
+	@PreAuthorize("hasAnyAuthority('ADMIN','USER')")
 	public void eleiminarNotificar(@PathVariable(name="id")int id) {
 		notificarServiceImpl.eliminarNotificar(id);
 	}

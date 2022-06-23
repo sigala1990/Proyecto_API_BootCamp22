@@ -3,6 +3,7 @@ package es.http.service.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,12 +23,14 @@ public class IntercambiarController {
 	IntercambiarServiceImpl intercambiarServiceImpl;
 	
 	@GetMapping("/intercambiar")
+	@PreAuthorize("hasAnyAuthority('ADMIN','USER')")
 	public List<Intercambiar> listarIntercambiars(){
 		return intercambiarServiceImpl.listarIntercambiar();
 	}
 	
 
 	@PostMapping("/intercambiar")
+	@PreAuthorize("hasAnyAuthority('ADMIN','USER')")
 	public Intercambiar salvarIntercambiar(@RequestBody Intercambiar intercambiar) {
 		
 		return intercambiarServiceImpl.guardarIntercambiar(intercambiar);
@@ -36,6 +39,7 @@ public class IntercambiarController {
 	
 	
 	@GetMapping("/intercambiar/{id}")
+	@PreAuthorize("hasAnyAuthority('ADMIN','USER')")
 	public Intercambiar IntercambiarXID(@PathVariable(name="id") int id) {
 		
 		Intercambiar Intercambiar_xid= new Intercambiar();
@@ -46,6 +50,7 @@ public class IntercambiarController {
 	}
 	
 	@PutMapping("/intercambiar/{id}")
+	@PreAuthorize("hasAnyAuthority('ADMIN','USER')")
 	public Intercambiar actualizarIntercambiar(@PathVariable(name="id")int id,@RequestBody Intercambiar intercambiar) {
 
 		
@@ -64,6 +69,7 @@ public class IntercambiarController {
 	}
 	
 	@DeleteMapping("/intercambiar/{id}")
+	@PreAuthorize("hasAnyAuthority('ADMIN','USER')")
 	public void eleiminarIntercambiar(@PathVariable(name="id")int id) {
 		intercambiarServiceImpl.eliminarIntercambiar(id);
 	}
