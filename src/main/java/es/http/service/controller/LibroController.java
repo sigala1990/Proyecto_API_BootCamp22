@@ -24,14 +24,15 @@ public class LibroController {
 	LibroServiceImpl libroServiceImpl;
 	
 	@GetMapping("/libro")
-	@PreAuthorize("hasAnyAuthority('ADMIN')")
+	@PreAuthorize("hasAnyAuthority('ADMIN','USER','GUESS')")
 	public List<Libro> listarLibro(){
 		return libroServiceImpl.listarLibro();
 	}
 	
 
-	@PreAuthorize("hasAnyAuthority('ADMIN')")
+
 	@PostMapping("/libro")
+	@PreAuthorize("hasAnyAuthority('ADMIN','USER')")
 	public Libro salvarLibro(@RequestBody Libro Libro) {
 		
 		return libroServiceImpl.guardarLibro(Libro);
@@ -39,6 +40,7 @@ public class LibroController {
 	
 	
 	@GetMapping("/libro/{id}")
+	@PreAuthorize("hasAnyAuthority('ADMIN','USER')")
 	public Libro LibroXID(@PathVariable(name="id") int id) {
 		
 		Libro Libro_xid= new Libro();
@@ -49,6 +51,7 @@ public class LibroController {
 	}
 	
 	@PutMapping("/libro/{id}")
+	@PreAuthorize("hasAnyAuthority('ADMIN','USER')")
 	public Libro actualizarLibro(@PathVariable(name="id")int id,@RequestBody Libro Libro) {
 		
 		Libro Libro_seleccionado= new Libro();
@@ -76,6 +79,7 @@ public class LibroController {
 	}
 	
 	@DeleteMapping("/libro/{id}")
+	@PreAuthorize("hasAnyAuthority('ADMIN','USER')")
 	public void eleiminarLibro(@PathVariable(name="id")int id) {
 		libroServiceImpl.eliminarLibro(id);
 	}

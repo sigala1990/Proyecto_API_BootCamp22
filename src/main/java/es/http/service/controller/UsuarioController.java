@@ -53,8 +53,8 @@ public class UsuarioController {
 		return usuarioServiceImpl.listarUsuario();
 	}
 	
-	@PreAuthorize("hasAnyAuthority('ADMIN')")
 	@PostMapping("/usuario")
+	@PreAuthorize("hasAnyAuthority('ADMIN','USER')")
 	public Usuario salvarUsuario(@RequestBody Usuario usuario) {
 		usuario.setPassword(bCryptPasswordEncoder.encode(usuario.getPassword()));
 		iUsuarioDAO.save(usuario);
@@ -64,6 +64,7 @@ public class UsuarioController {
 	
 	
 	@GetMapping("/usuario/{id}")
+	@PreAuthorize("hasAnyAuthority('ADMIN','USER')")
 	public Usuario usuarioXID(@PathVariable(name="id") int id) {
 		
 		
@@ -77,6 +78,7 @@ public class UsuarioController {
 	}
 	
 	@PutMapping("/usuario/{id}")
+	@PreAuthorize("hasAnyAuthority('ADMIN','USER')")
 	public Usuario actualizarUsuario(@PathVariable(name="id")int id,@RequestBody Usuario usuario) {
 		
 		Usuario Usuario_seleccionado= new Usuario();
@@ -101,6 +103,7 @@ public class UsuarioController {
 	}
 	
 	@DeleteMapping("/usuario/{id}")
+	@PreAuthorize("hasAnyAuthority('ADMIN','USER')")
 	public void eleiminarUsuario(@PathVariable(name="id")int id) {
 		usuarioServiceImpl.eliminarUsuario(id);
 	}

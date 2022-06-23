@@ -3,6 +3,7 @@ package es.http.service.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,12 +24,14 @@ public class PrestarController {
 	PrestarServiceImpl prestarServiceImpl;
 	
 	@GetMapping("/prestar")
+	@PreAuthorize("hasAnyAuthority('ADMIN','USER')")
 	public List<Prestar> listarPrestar(){
 		return prestarServiceImpl.listarPrestar();
 	}
 	
 	
 	@PostMapping("/prestar")
+	@PreAuthorize("hasAnyAuthority('ADMIN','USER')")
 	public Prestar salvarPrestar(@RequestBody Prestar Prestar) {
 		
 		return prestarServiceImpl.guardarPrestar(Prestar);
@@ -36,6 +39,7 @@ public class PrestarController {
 	
 	
 	@GetMapping("/prestar/{id}")
+	@PreAuthorize("hasAnyAuthority('ADMIN','USER')")
 	public Prestar PrestarXID(@PathVariable(name="id") int id) {
 		
 		Prestar Prestar_xid= new Prestar();
@@ -46,6 +50,7 @@ public class PrestarController {
 	}
 	
 	@PutMapping("/prestar/{id}")
+	@PreAuthorize("hasAnyAuthority('ADMIN','USER')")
 	public Prestar actualizarPrestar(@PathVariable(name="id")int id,@RequestBody Prestar Prestar) {
 		
 		Prestar Prestar_seleccionado= new Prestar();
@@ -66,6 +71,7 @@ public class PrestarController {
 	}
 	
 	@DeleteMapping("/prestar/{id}")
+	@PreAuthorize("hasAnyAuthority('ADMIN','USER')")
 	public void eleiminarPrestar(@PathVariable(name="id")int id) {
 		prestarServiceImpl.eliminarPrestar(id);
 	}
