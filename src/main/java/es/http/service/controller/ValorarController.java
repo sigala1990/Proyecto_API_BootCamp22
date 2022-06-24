@@ -3,6 +3,7 @@ package es.http.service.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,12 +23,14 @@ public class ValorarController {
 	ValorarServiceImpl valorarServiceImpl;
 	
 	@GetMapping("/valorar")
+	@PreAuthorize("hasAnyAuthority('ADMIN','USER','GUESS')")
 	public List<Valorar> listarCvalorars(){
 		return valorarServiceImpl.listarValorar();
 	}
 	
 
 	@PostMapping("/valorar")
+	@PreAuthorize("hasAnyAuthority('ADMIN','USER')")
 	public Valorar salvarValorar(@RequestBody Valorar valorar) {
 		
 		return valorarServiceImpl.guardarValorar(valorar);
@@ -36,6 +39,7 @@ public class ValorarController {
 	
 	
 	@GetMapping("/valorar/{id}")
+	@PreAuthorize("hasAnyAuthority('ADMIN','USER')")
 	public Valorar ValorarXID(@PathVariable(name="id") int id) {
 		
 		Valorar Valorar_xid= new Valorar();
@@ -46,6 +50,7 @@ public class ValorarController {
 	}
 	
 	@PutMapping("/valorar/{id}")
+	@PreAuthorize("hasAnyAuthority('ADMIN','USER')")
 	public Valorar actualizarValorar(@PathVariable(name="id")int id,@RequestBody Valorar valorar) {
 
 		
@@ -64,6 +69,7 @@ public class ValorarController {
 	}
 	
 	@DeleteMapping("/valorar/{id}")
+	@PreAuthorize("hasAnyAuthority('ADMIN','USER')")
 	public void eleiminarValorar(@PathVariable(name="id")int id) {
 		valorarServiceImpl.eliminarValorar(id);
 	}

@@ -20,6 +20,11 @@ public class UsuarioServiceImpl implements IUsuarioService, UserDetailsService {
 	public List<Usuario> listarUsuario() {
 		return iUsuarioDAO.findAll();
 	}
+	
+	@Override
+	public Usuario buscarByUsername (String username) {
+		return iUsuarioDAO.findByUsername(username);
+	}
 
 	@Override
 	public Usuario guardarUsuario(Usuario usuario) {

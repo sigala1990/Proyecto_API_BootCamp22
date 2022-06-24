@@ -3,6 +3,7 @@ package es.http.service.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,12 +24,14 @@ public class EditorialController {
 	EditorialServiceImpl editorialServiceImpl;
 	
 	@GetMapping("/editorial")
+	@PreAuthorize("hasAnyAuthority('ADMIN','USER')")
 	public List<Editorial> listarEditorial(){
 		return editorialServiceImpl.listarEditorial();
 	}
 	
 	
 	@PostMapping("/editorial")
+	@PreAuthorize("hasAnyAuthority('ADMIN','USER')")
 	public Editorial salvarEditorial(@RequestBody Editorial editorial) {
 		
 		return editorialServiceImpl.guardarEditorial(editorial);
@@ -36,6 +39,7 @@ public class EditorialController {
 	
 	
 	@GetMapping("/editorial/{id}")
+	@PreAuthorize("hasAnyAuthority('ADMIN','USER')")
 	public Editorial editorialXID(@PathVariable(name="id") Integer id) {
 		
 		Editorial Editorial_xid= new Editorial();
@@ -46,6 +50,7 @@ public class EditorialController {
 	}
 	
 	@PutMapping("/editorial/{id}")
+	@PreAuthorize("hasAnyAuthority('ADMIN','USER')")
 	public Editorial actualizarEditorial(@PathVariable(name="id")Integer id,@RequestBody Editorial editorial) {
 		
 		Editorial Editorial_seleccionado= new Editorial();
@@ -61,6 +66,7 @@ public class EditorialController {
 	}
 	
 	@DeleteMapping("/editorial/{id}")
+	@PreAuthorize("hasAnyAuthority('ADMIN','USER')")
 	public void eleiminarEditorial(@PathVariable(name="id")Integer id) {
 		editorialServiceImpl.eliminarEditorial(id);
 	}

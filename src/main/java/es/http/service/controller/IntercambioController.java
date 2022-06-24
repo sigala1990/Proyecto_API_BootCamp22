@@ -3,6 +3,7 @@ package es.http.service.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,12 +23,14 @@ public class IntercambioController {
 	IntercambioServiceImpl intercambioServiceImpl;
 	
 	@GetMapping("/intercambio")
+	@PreAuthorize("hasAnyAuthority('ADMIN','USER')")
 	public List<Intercambio> listarCintercambios(){
 		return intercambioServiceImpl.listarIntercambio();
 	}
 	
 
 	@PostMapping("/intercambio")
+	@PreAuthorize("hasAnyAuthority('ADMIN','USER')")
 	public Intercambio salvarIntercambio(@RequestBody Intercambio intercambio) {
 		
 		return intercambioServiceImpl.guardarIntercambio(intercambio);
@@ -36,6 +39,7 @@ public class IntercambioController {
 	
 	
 	@GetMapping("/intercambio/{id}")
+	@PreAuthorize("hasAnyAuthority('ADMIN','USER')")
 	public Intercambio IntercambioXID(@PathVariable(name="id") int id) {
 		
 		Intercambio Intercambio_xid= new Intercambio();
@@ -46,6 +50,7 @@ public class IntercambioController {
 	}
 	
 	@PutMapping("/intercambio/{id}")
+	@PreAuthorize("hasAnyAuthority('ADMIN','USER')")
 	public Intercambio actualizarIntercambio(@PathVariable(name="id")int id,@RequestBody Intercambio intercambio) {
 
 		
@@ -64,6 +69,7 @@ public class IntercambioController {
 	}
 	
 	@DeleteMapping("/intercambio/{id}")
+	@PreAuthorize("hasAnyAuthority('ADMIN','USER')")
 	public void eleiminarIntercambio(@PathVariable(name="id")int id) {
 		intercambioServiceImpl.eliminarIntercambio(id);
 	}

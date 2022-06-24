@@ -1,5 +1,6 @@
 package es.http.service.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,8 +54,15 @@ public class UsuarioController {
 		return usuarioServiceImpl.listarUsuario();
 	}
 	
-	@PreAuthorize("hasAnyAuthority('ADMIN')")
+	@GetMapping("/usuario/username/{username}")
+	@PreAuthorize("hasAnyAuthority('ADMIN','USER')")
+	public Usuario listarCogerNombreUsuarios(@PathVariable(name="username") String username){
+		
+		return usuarioServiceImpl.buscarByUsername(username);
+	}
+	
 	@PostMapping("/usuario")
+	@PreAuthorize("hasAnyAuthority('ADMIN','USER')")
 	public Usuario salvarUsuario(@RequestBody Usuario usuario) {
 		usuario.setPassword(bCryptPasswordEncoder.encode(usuario.getPassword()));
 		iUsuarioDAO.save(usuario);
@@ -64,6 +72,7 @@ public class UsuarioController {
 	
 	
 	@GetMapping("/usuario/{id}")
+	@PreAuthorize("hasAnyAuthority('ADMIN','USER')")
 	public Usuario usuarioXID(@PathVariable(name="id") int id) {
 		
 		
@@ -77,6 +86,7 @@ public class UsuarioController {
 	}
 	
 	@PutMapping("/usuario/{id}")
+	@PreAuthorize("hasAnyAuthority('ADMIN','USER')")
 	public Usuario actualizarUsuario(@PathVariable(name="id")int id,@RequestBody Usuario usuario) {
 		
 		Usuario Usuario_seleccionado= new Usuario();
@@ -101,6 +111,7 @@ public class UsuarioController {
 	}
 	
 	@DeleteMapping("/usuario/{id}")
+	@PreAuthorize("hasAnyAuthority('ADMIN','USER')")
 	public void eleiminarUsuario(@PathVariable(name="id")int id) {
 		usuarioServiceImpl.eliminarUsuario(id);
 	}
