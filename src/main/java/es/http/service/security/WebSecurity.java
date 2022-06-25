@@ -1,3 +1,4 @@
+
 package es.http.service.security;
 
 import static es.http.service.security.Constants.LOGIN_URL;
@@ -6,6 +7,11 @@ import static es.http.service.security.Constants.SWAGGER_UI_HTML;
 import static es.http.service.security.Constants.SWAGGER_API_DOCS;
 import static es.http.service.security.Constants.SWAGGER_UI;
 import static es.http.service.security.Constants.SWAGGER_WEBJARS;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+
+import javax.servlet.Filter;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -17,38 +23,31 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-
-import es.http.service.services.UsuarioServiceImpl;
-
-
 
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurity extends WebSecurityConfigurerAdapter {
 
+	private UserDetailsService userDetailsService;
+	private Filter simpleCorsFilter;
+
+	public WebSecurity(UserDetailsService userDetailsService) {
+		this.userDetailsService = userDetailsService;
+	}
+
+	@Bean
+	public BCryptPasswordEncoder bCryptPasswordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
 	
 	@Autowired
-	UsuarioServiceImpl usuarioDetailsServiceImpl;
-	//private UserDetailsService userDetailsService;
-
-	/*public WebSecurity(UserDetailsService userDetailsService) {
-		this.userDetailsService = userDetailsService;
-	}*/
-	
-	@Bean
-	/*public BCryptPasswordEncoder bCryptPasswordEncoder() {
-		return new BCryptPasswordEncoder();
-	}*/
-   public BCryptPasswordEncoder passwordEncoder() {
-        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-        return bCryptPasswordEncoder;
-    }
-
+	public SimpleCORSFilter myCorsFilter;
 	@Override
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
 		/*
@@ -56,43 +55,35 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 		 * 2. Se activa la configuración CORS con los valores por defecto
 		 * 3. Se desactiva el filtro CSRF
 		 * 4. Se indica que el login no requiere autenticación
-		 * 5. Se indica que el resto de URLs esten securizadas// "/css/**", "/js/**" ----" /api/equipos/**"
+		 * 5. Se indica que el resto de URLs esten securizadas
 		 */
-		System.out.println("web security");
-	httpSecurity
-			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and() 
+		httpSecurity
+			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 			.cors().and()
 			.csrf().disable()
-			.authorizeRequests().antMatchers(HttpMethod.POST, LOGIN_URL).permitAll()
-								.antMatchers(SWAGGER_RESOURCES).permitAll()
-								.antMatchers(SWAGGER_UI_HTML).permitAll()
-								.antMatchers(SWAGGER_API_DOCS).permitAll()
-								.antMatchers(SWAGGER_UI).permitAll()
-								.antMatchers(SWAGGER_WEBJARS).permitAll()
-			//.antMatchers("/api/usuario").hasAuthority("ADMIN")
-			//.antMatchers("/api/facultad").hasAuthority("ADMIN")
+			.authorizeRequests()
+			.antMatchers(HttpMethod.POST, LOGIN_URL).permitAll()
 			.anyRequest().authenticated()
-			//.antMatchers("/api/**").hasRole("USER")	
-			//.antMatchers("/api/**").hasRole("ADMIN")	
+//			.anyRequest().hasAuthority("ROLE_ADMIN")
 			.and()
 				.addFilter(new JWTAuthenticationFilter(authenticationManager()))
 				.addFilter(new JWTAuthorizationFilter(authenticationManager()));
 	}
 
-	
-	//@Autowired
 	@Override
-	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+	public void configure(AuthenticationManagerBuilder auth) throws Exception {
 		// Se define la clase que recupera los usuarios y el algoritmo para procesar las passwords
-	//usuarioDetailsServiceImpl.loadUserByUsername(usuarioDetailsServiceImpl)
-	auth.userDetailsService(usuarioDetailsServiceImpl).passwordEncoder(passwordEncoder());
-	
+		auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
 	}
 
 	@Bean
 	CorsConfigurationSource corsConfigurationSource() {
+		CorsConfiguration corsConfiguration = new CorsConfiguration();
+		corsConfiguration.setAllowedMethods(Arrays.asList("GET","POST", "OPTIONS", "PUT", "DELETE"));
+		corsConfiguration.setAllowedOrigins(Arrays.asList("*", "http://localhost:4200/signin"));
 		final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-		source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
+		source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues().combine(corsConfiguration));
 		return source;
 	}
+
 }
