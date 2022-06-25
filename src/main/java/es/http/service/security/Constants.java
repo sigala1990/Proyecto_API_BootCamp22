@@ -4,9 +4,9 @@ public class Constants {
 
 	// Spring Security
 
-	public static final String LOGIN_URL = System.getenv().get("LOGIN_URL");
-	public static final String HEADER_AUTHORIZACION_KEY = System.getenv().get("HEADER_AUTHORIZACION_KEY");
-	public static final String TOKEN_BEARER_PREFIX = System.getenv().get("TOKEN_BEARER_PREFIX");
+	public static final String LOGIN_URL = "/login";
+	public static final String HEADER_AUTHORIZACION_KEY = "Authorization";
+	public static final String TOKEN_BEARER_PREFIX = "Bearer ";
 
 	// JWT
 
@@ -16,10 +16,10 @@ public class Constants {
 	
 	// Swagger
 	
-	public static final String SWAGGER_RESOURCES = System.getenv().get("SWAGGER_RESOURCES");
-	public static final String SWAGGER_UI_HTML = System.getenv().get("SWAGGER_UI_HTML");
-	public static final String SWAGGER_API_DOCS = System.getenv().get("SWAGGER_API_DOCS");
-	public static final String SWAGGER_UI = System.getenv().get("SWAGGER_UI");
-	public static final String SWAGGER_WEBJARS = System.getenv().get("SWAGGER_WEBJARS");
+	public static final String SWAGGER_RESOURCES = "/swagger-resources/**";
+	public static final String SWAGGER_UI_HTML = "/swagger-ui.html";
+	public static final String SWAGGER_API_DOCS = "/v3/api-docs";
+	public static final String SWAGGER_UI = "/swagger-ui/**";
+	public static final String SWAGGER_WEBJARS = "/webjars/**";
 
 }
