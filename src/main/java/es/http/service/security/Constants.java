@@ -1,3 +1,4 @@
+<<<<<<< Upstream, based on branch 'development' of https://github.com/sigala1990/Proyecto_API_BootCamp22.git
 package es.http.service.security;
 
 public class Constants {
@@ -22,4 +23,30 @@ public class Constants {
 	public static final String SWAGGER_UI = System.getenv().get("SWAGGER_UI");
 	public static final String SWAGGER_WEBJARS = System.getenv().get("SWAGGER_WEBJARS");
 
+=======
+package es.http.service.security;
+
+public class Constants {
+
+	// Spring Security
+
+	public static final String LOGIN_URL = "/login";
+	public static final String HEADER_AUTHORIZACION_KEY = "Authorization";
+	public static final String TOKEN_BEARER_PREFIX = "Bearer ";
+
+	// JWT
+
+	public static final String ISSUER_INFO = "Jose MarÃ­n";
+	public static final String SUPER_SECRET_KEY = "1234";
+	public static final long TOKEN_EXPIRATION_TIME = 864_000_000; // 10 day
+	
+	// Swagger
+	
+	public static final String SWAGGER_RESOURCES = "/swagger-resources/**";
+	public static final String SWAGGER_UI_HTML = "/swagger-ui.html";
+	public static final String SWAGGER_API_DOCS = "/v3/api-docs";
+	public static final String SWAGGER_UI = "/swagger-ui/**";
+	public static final String SWAGGER_WEBJARS = "/webjars/**";
+
+>>>>>>> f7585f1 Fix error
 }
