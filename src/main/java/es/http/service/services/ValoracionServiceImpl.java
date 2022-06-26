@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import es.http.service.DAO.IValoracionDAO;
+import es.http.service.dto.Libro;
 import es.http.service.dto.Valoracion;
 
 @Service
@@ -36,6 +37,11 @@ public class ValoracionServiceImpl implements IValoracionService{
 	@Override
 	public void eliminarValoracion(int id) {
 		iValoracionDAO.deleteById(id);
+	}
+
+	@Override
+	public List<Valoracion> listarPorLibro(Libro libro) {
+		return iValoracionDAO.findByLibro(libro);
 	}
 
 
