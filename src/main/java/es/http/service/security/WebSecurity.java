@@ -80,7 +80,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 	CorsConfigurationSource corsConfigurationSource() {
 		CorsConfiguration corsConfiguration = new CorsConfiguration();
 		corsConfiguration.setAllowedMethods(Arrays.asList("GET","POST", "OPTIONS", "PUT", "DELETE"));
-		corsConfiguration.setAllowedOrigins(Arrays.asList("*", "http://localhost:4200/", "https://api-alquiler-de-libros-2022.herokuapp.com/"));
+		corsConfiguration.setAllowedOrigins(Arrays.asList("*", "http://localhost:4200/","https://api-alquiler-de-libros-2022.herokuapp.com/"));
 		final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 		source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues().combine(corsConfiguration));
 		return source;
