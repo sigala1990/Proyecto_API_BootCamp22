@@ -3,6 +3,7 @@ package es.http.service.services;
 import java.util.List;
 
 import es.http.service.dto.Libro;
+import es.http.service.dto.Usuario;
 
 public interface ILibroService {
 
@@ -16,5 +17,7 @@ public interface ILibroService {
 	public Libro actualizarLibro(Libro libro); // Actualiza datos del RegistroLibro UPDATE
 
 	public void eliminarLibro(int id);// Elimina el RegistroLibro DELETE
+	
+	public List<Libro> listarPorUsuario(Usuario usuario);
 
 }

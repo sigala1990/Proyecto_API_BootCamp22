@@ -3,6 +3,7 @@ package es.http.service.services;
 import java.util.List;
 
 import es.http.service.dto.Libro;
+import es.http.service.dto.Usuario;
 import es.http.service.dto.Valoracion;
 
 public interface IValoracionService {
@@ -18,5 +19,7 @@ public interface IValoracionService {
 	public void eliminarValoracion(int id);// Elimina el cliente DELETE
 	
 	public List<Valoracion> listarPorLibro(Libro libro);
+	
+	public List<Valoracion> buscarPorUsuario(Usuario usuario);
 	
 }

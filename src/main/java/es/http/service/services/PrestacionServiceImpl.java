@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import es.http.service.DAO.IPrestacionDAO;
 import es.http.service.dto.Prestacion;
+import es.http.service.dto.Usuario;
 
 @Service
 public class PrestacionServiceImpl implements IPrestacionService{
@@ -37,6 +38,12 @@ public class PrestacionServiceImpl implements IPrestacionService{
 	@Override
 	public void eliminarPrestacion(int id) {
 		iPrestacionDAO.deleteById(id);
+	}
+
+	@Override
+	public List<Prestacion> listarPorUsuario(Usuario usuario) {
+		// TODO Auto-generated method stub
+		return iPrestacionDAO.findByUsuario(usuario);
 	}
 
 }

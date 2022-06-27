@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import es.http.service.dto.Libro;
+import es.http.service.dto.Usuario;
 import es.http.service.services.LibroServiceImpl;
 
 @RestController
@@ -36,6 +37,13 @@ public class LibroController {
 	public Libro salvarLibro(@RequestBody Libro Libro) {
 		
 		return libroServiceImpl.guardarLibro(Libro);
+	}
+	
+	@PostMapping("/libro/usuario")
+	@PreAuthorize("hasAnyAuthority('ADMIN','USER')")
+	public List<Libro> listarLibroPorUsuario(@RequestBody Usuario usuario) {
+		
+		return libroServiceImpl.listarPorUsuario(usuario);
 	}
 	
 	

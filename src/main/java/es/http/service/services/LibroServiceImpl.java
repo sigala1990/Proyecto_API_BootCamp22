@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import es.http.service.DAO.ILibroDAO;
 import es.http.service.dto.Libro;
+import es.http.service.dto.Usuario;
 
 @Service
 public class LibroServiceImpl implements ILibroService{
@@ -42,6 +43,12 @@ public class LibroServiceImpl implements ILibroService{
 	public void eliminarLibro(int id) {
 		// TODO Auto-generated method stub
 		iLibroDAO.deleteById(id);
+	}
+
+	@Override
+	public List<Libro> listarPorUsuario(Usuario usuario) {
+		// TODO Auto-generated method stub
+		return iLibroDAO.findByUsuario(usuario);
 	}
 
 }

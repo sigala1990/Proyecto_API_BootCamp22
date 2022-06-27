@@ -5,8 +5,10 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import es.http.service.dto.Libro;
+import es.http.service.dto.Usuario;
 import es.http.service.dto.Valoracion;
 
 public interface IValoracionDAO extends JpaRepository<Valoracion, Integer>{
 	List<Valoracion> findByLibro(Libro libro);
+	List<Valoracion> findByUsuario(Usuario usuario);
 }

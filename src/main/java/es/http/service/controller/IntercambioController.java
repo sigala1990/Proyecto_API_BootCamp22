@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import es.http.service.dto.Intercambio;
+import es.http.service.dto.Usuario;
 import es.http.service.services.IntercambioServiceImpl;
 
 @RestController
