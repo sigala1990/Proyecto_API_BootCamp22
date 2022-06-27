@@ -74,7 +74,7 @@ public class ValoracionController {
 		Valoracion_seleccionado= valoracionServiceImpl.valoracionXID(id);
 		
 		Valoracion_seleccionado.setLibro(valoracion.getLibro());
-		Valoracion_seleccionado.setUsuario(valoracion.getUsuario());
+		//Valoracion_seleccionado.setUsuario(valoracion.getUsuario());
 		Valoracion_seleccionado.setValorar(valoracion.getValorar());
 		
 		Valoracion_actualizado = valoracionServiceImpl.actualizarValoracion(Valoracion_seleccionado);
@@ -94,7 +94,7 @@ public class ValoracionController {
 		Valoracion_seleccionado= valoracionServiceImpl.valoracionXID(id);
 		
 		Valoracion_seleccionado.setLibro(valoracion.getLibro());
-		Valoracion_seleccionado.setUsuario(valoracion.getUsuario());
+		//Valoracion_seleccionado.setUsuario(valoracion.getUsuario());
 		Valoracion_seleccionado.setValorar(valoracion.getValorar());
 		
 		Valoracion_actualizado = valoracionServiceImpl.actualizarValoracion(Valoracion_seleccionado);

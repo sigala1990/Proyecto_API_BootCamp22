@@ -31,25 +31,25 @@ public class LibroController {
 		return libroServiceImpl.listarLibro();
 	}
 	
-	@GetMapping("/libro/{titulo}")
+	@GetMapping("/libro/titulo/{titulo}")
 	@PreAuthorize("hasAnyAuthority('ADMIN','USER','GUESS')")
 	public Libro buscarLibroPor(@PathVariable(name="titulo")String titulo){
 		return libroServiceImpl.buscarPorTitulo(titulo);
 	}
 	
-	@PostMapping("/libro/usuari/tituloasc")
+	@PostMapping("/libro/usuario/tituloasc")
 	@PreAuthorize("hasAnyAuthority('ADMIN','USER')")
 	public List<Libro> BuscarUsuarioPorTituloAsc(@RequestBody Usuario usuario){
 		return libroServiceImpl.BuscarPorUsuarioOrdenarPorTituloAsc(usuario);
 	}
 	
-	@PostMapping("/libro/usuari/titulodesc")
+	@PostMapping("/libro/usuario/titulodesc")
 	@PreAuthorize("hasAnyAuthority('ADMIN','USER')")
 	public List<Libro> BuscarUsuarioPorTituloDesc(@RequestBody Usuario usuario){
 		return libroServiceImpl.BuscarPorUsuarioOrdenarPorTituloDesc(usuario);
 	}
 	
-	@GetMapping("/libro/{isbn}")
+	@GetMapping("/libro/isbn/{isbn}")
 	@PreAuthorize("hasAnyAuthority('ADMIN','USER','GUESS')")
 	public Libro buscarPorIsbn(@PathVariable(name="isbn")String isbn) {
 		return libroServiceImpl.buscarPorIsbn(isbn);
@@ -100,7 +100,7 @@ public class LibroController {
 
 		Libro_seleccionado.setCantidad_veces_reservado(Libro.getCantidad_veces_reservado());
 		Libro_seleccionado.setUrl_img(Libro.getUrl_img());
-		Libro_seleccionado.setUsuario(Libro.getUsuario());
+		//Libro_seleccionado.setUsuario(Libro.getUsuario());
 		Libro_seleccionado.setEditorial(Libro.getEditorial());
 		Libro_seleccionado.setDescripcion(Libro.getDescripcion());
 		Libro_seleccionado.setDisponible(Libro.getDisponible());
@@ -128,7 +128,7 @@ public class LibroController {
 
 		Libro_seleccionado.setCantidad_veces_reservado(Libro.getCantidad_veces_reservado());
 		Libro_seleccionado.setUrl_img(Libro.getUrl_img());
-		Libro_seleccionado.setUsuario(Libro.getUsuario());
+		//Libro_seleccionado.setUsuario(Libro.getUsuario());
 		Libro_seleccionado.setEditorial(Libro.getEditorial());
 		Libro_seleccionado.setDescripcion(Libro.getDescripcion());
 		Libro_seleccionado.setDisponible(Libro.getDisponible());

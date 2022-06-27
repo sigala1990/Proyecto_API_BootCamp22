@@ -68,7 +68,7 @@ public class PrestacionController {
 		
 		Prestacion_seleccionado.setLibro_prestacion_id(Prestacion.getLibro_prestacion_id());
 		Prestacion_seleccionado.setPrestar_id(Prestacion.getPrestar_id());
-		Prestacion_seleccionado.setUsuario(Prestacion.getUsuario());
+		//Prestacion_seleccionado.setUsuario(Prestacion.getUsuario());
 
 		
 		Prestacion_actualizado = prestacionServiceImpl.actualizarPrestacion(Prestacion_seleccionado);
@@ -87,7 +87,7 @@ public class PrestacionController {
 		
 		Prestacion_seleccionado.setLibro_prestacion_id(Prestacion.getLibro_prestacion_id());
 		Prestacion_seleccionado.setPrestar_id(Prestacion.getPrestar_id());
-		Prestacion_seleccionado.setUsuario(Prestacion.getUsuario());
+		//Prestacion_seleccionado.setUsuario(Prestacion.getUsuario());
 
 		
 		Prestacion_actualizado = prestacionServiceImpl.actualizarPrestacion(Prestacion_seleccionado);
