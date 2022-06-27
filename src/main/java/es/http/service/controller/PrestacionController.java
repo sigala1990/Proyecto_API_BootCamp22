@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import es.http.service.dto.Prestacion;
+import es.http.service.dto.Usuario;
 import es.http.service.services.PrestacionServiceImpl;
 
 @RestController
@@ -37,6 +38,12 @@ public class PrestacionController {
 		return prestacionServiceImpl.guardarPrestacion(Prestacion);
 	}
 	
+	@PostMapping("/prestacion/usuario")
+	@PreAuthorize("hasAnyAuthority('ADMIN','USER')")
+	public List<Prestacion> listarPorUsuario(@RequestBody Usuario usuario) {
+		
+		return prestacionServiceImpl.listarPorUsuario(usuario);
+	}
 	
 	@GetMapping("/prestacion/{id}")
 	@PreAuthorize("hasAnyAuthority('ADMIN','USER')")
@@ -60,7 +67,7 @@ public class PrestacionController {
 		
 		Prestacion_seleccionado.setLibro_prestacion_id(Prestacion.getLibro_prestacion_id());
 		Prestacion_seleccionado.setPrestar_id(Prestacion.getPrestar_id());
-		Prestacion_seleccionado.setUsuario_prestacion_id(Prestacion.getUsuario_prestacion_id());
+		Prestacion_seleccionado.setUsuario(Prestacion.getUsuario());
 
 		
 		Prestacion_actualizado = prestacionServiceImpl.actualizarPrestacion(Prestacion_seleccionado);

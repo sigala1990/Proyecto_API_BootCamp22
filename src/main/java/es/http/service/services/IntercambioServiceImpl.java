@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import es.http.service.DAO.IIntercambioDAO;
 import es.http.service.dto.Intercambio;
+import es.http.service.dto.Usuario;
 
 
 @Service
@@ -43,5 +44,7 @@ public class IntercambioServiceImpl implements IIntercambioService{
 		// TODO Auto-generated method stub
 		iIntercambioDAO.deleteById(id);
 	}
+
+	
 
 }

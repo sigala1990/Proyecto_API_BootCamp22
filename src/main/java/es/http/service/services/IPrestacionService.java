@@ -3,6 +3,7 @@ package es.http.service.services;
 import java.util.List;
 
 import es.http.service.dto.Prestacion;
+import es.http.service.dto.Usuario;
 
 public interface IPrestacionService {
 	
@@ -16,5 +17,7 @@ public interface IPrestacionService {
 		public Prestacion actualizarPrestacion(Prestacion prestacion); // Actualiza datos del RegistroPrestacion UPDATE
 
 		public void eliminarPrestacion(int id);// Elimina el RegistroPrestacion DELETE
+		
+		List<Prestacion> listarPorUsuario(Usuario usuario);
 
 }

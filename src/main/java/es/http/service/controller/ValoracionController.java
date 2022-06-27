@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import es.http.service.dto.Libro;
+import es.http.service.dto.Usuario;
 import es.http.service.dto.Valoracion;
 import es.http.service.services.ValoracionServiceImpl;
 @RestController
@@ -32,6 +33,12 @@ public class ValoracionController {
 	@PreAuthorize("hasAnyAuthority('ADMIN','USER','GUESS')")
 	public List<Valoracion> listarPorLibros(@RequestBody Libro libro){
 		return valoracionServiceImpl.listarPorLibro(libro);
+	}
+	
+	@PostMapping("/valoracion/usuario")
+	@PreAuthorize("hasAnyAuthority('ADMIN','USER','GUESS')")
+	public List<Valoracion> listarPorUsuario(@RequestBody Usuario usuario){
+		return valoracionServiceImpl.buscarPorUsuario(usuario);
 	}
 	
 	

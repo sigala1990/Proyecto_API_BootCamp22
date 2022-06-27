@@ -25,7 +25,7 @@ public class Prestacion {
 	
 	@ManyToOne
 	@JoinColumn(name = "usuario_prestacion_id") 
-	Usuario usuario_prestacion_id;
+	Usuario usuario;
 	
 	@ManyToOne
 	@JoinColumn(name = "libro_prestacion_id") 
@@ -41,10 +41,10 @@ public class Prestacion {
 		super();
 	}
 
-	public Prestacion(int id, Usuario usuario_prestacion_id, Libro libro_prestacion_id, Prestar prestar_id) {
+	public Prestacion(int id, Usuario usuario, Libro libro_prestacion_id, Prestar prestar_id) {
 		super();
 		this.id = id;
-		this.usuario_prestacion_id = usuario_prestacion_id;
+		this.usuario = usuario;
 		this.libro_prestacion_id = libro_prestacion_id;
 		this.prestar_id = prestar_id;
 	}
@@ -57,13 +57,13 @@ public class Prestacion {
 		this.id = id;
 	}
 
-	public Usuario getUsuario_prestacion_id() {
-		return usuario_prestacion_id;
+	public Usuario getUsuario() {
+		return usuario;
 	}
 
 	
-	public void setUsuario_prestacion_id(Usuario usuario_prestacion_id) {
-		this.usuario_prestacion_id = usuario_prestacion_id;
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 	
@@ -85,7 +85,7 @@ public class Prestacion {
 
 	@Override
 	public String toString() {
-		return "Prestacion [id=" + id + ", usuario_prestacion_id=" + usuario_prestacion_id + ", libro_prestacion_id="
+		return "Prestacion [id=" + id + ", usuario_prestacion_id=" + usuario + ", libro_prestacion_id="
 				+ libro_prestacion_id + ", prestar_id=" + prestar_id + "]";
 	}
 	 

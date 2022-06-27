@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import es.http.service.DAO.IValoracionDAO;
 import es.http.service.dto.Libro;
+import es.http.service.dto.Usuario;
 import es.http.service.dto.Valoracion;
 
 @Service
@@ -42,6 +43,12 @@ public class ValoracionServiceImpl implements IValoracionService{
 	@Override
 	public List<Valoracion> listarPorLibro(Libro libro) {
 		return iValoracionDAO.findByLibro(libro);
+	}
+
+	@Override
+	public List<Valoracion> buscarPorUsuario(Usuario usuario) {
+		// TODO Auto-generated method stub
+		return iValoracionDAO.findByUsuario(usuario);
 	}
 
 
