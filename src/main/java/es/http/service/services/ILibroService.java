@@ -19,5 +19,13 @@ public interface ILibroService {
 	public void eliminarLibro(int id);// Elimina el RegistroLibro DELETE
 	
 	public List<Libro> listarPorUsuario(Usuario usuario);
+	
+	public Libro buscarPorTitulo(String titulo);
+	
+	public List<Libro> BuscarPorUsuarioOrdenarPorTituloAsc(Usuario usuario);
+	
+	public List<Libro> BuscarPorUsuarioOrdenarPorTituloDesc(Usuario usuario);
+	
+	public Libro buscarPorIsbn(String isbn);
 
 }

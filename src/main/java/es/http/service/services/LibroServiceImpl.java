@@ -51,4 +51,28 @@ public class LibroServiceImpl implements ILibroService{
 		return iLibroDAO.findByUsuario(usuario);
 	}
 
+	@Override
+	public Libro buscarPorTitulo(String titulo) {
+		// TODO Auto-generated method stub
+		return iLibroDAO.findByTitulo(titulo);
+	}
+
+	@Override
+	public List<Libro> BuscarPorUsuarioOrdenarPorTituloAsc(Usuario usuario) {
+		// TODO Auto-generated method stub
+		return iLibroDAO.findByUsuarioOrderByTituloAsc(usuario);
+	}
+
+	@Override
+	public List<Libro> BuscarPorUsuarioOrdenarPorTituloDesc(Usuario usuario) {
+		// TODO Auto-generated method stub
+		return iLibroDAO.findByUsuarioOrderByTituloDesc(usuario);
+	}
+
+	@Override
+	public Libro buscarPorIsbn(String isbn) {
+		// TODO Auto-generated method stub
+		return iLibroDAO.findByIsbn(isbn);
+	}
+
 }
