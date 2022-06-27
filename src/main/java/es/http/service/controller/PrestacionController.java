@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -56,6 +57,25 @@ public class PrestacionController {
 		return Prestacion_xid;
 	}
 	
+	@PatchMapping("/prestacion/{id}")
+	@PreAuthorize("hasAnyAuthority('ADMIN','USER')")
+	public Prestacion actualizarPrestacionPatch(@PathVariable(name="id")int id,@RequestBody Prestacion Prestacion) {
+		
+		Prestacion Prestacion_seleccionado= new Prestacion();
+		Prestacion Prestacion_actualizado= new Prestacion();
+		
+		Prestacion_seleccionado= prestacionServiceImpl.PrestacionXID(id);
+		
+		Prestacion_seleccionado.setLibro_prestacion_id(Prestacion.getLibro_prestacion_id());
+		Prestacion_seleccionado.setPrestar_id(Prestacion.getPrestar_id());
+		//Prestacion_seleccionado.setUsuario(Prestacion.getUsuario());
+
+		
+		Prestacion_actualizado = prestacionServiceImpl.actualizarPrestacion(Prestacion_seleccionado);
+				
+		return Prestacion_actualizado;
+	}
+	
 	@PutMapping("/prestacion/{id}")
 	@PreAuthorize("hasAnyAuthority('ADMIN','USER')")
 	public Prestacion actualizarPrestacion(@PathVariable(name="id")int id,@RequestBody Prestacion Prestacion) {
@@ -67,7 +87,7 @@ public class PrestacionController {
 		
 		Prestacion_seleccionado.setLibro_prestacion_id(Prestacion.getLibro_prestacion_id());
 		Prestacion_seleccionado.setPrestar_id(Prestacion.getPrestar_id());
-		Prestacion_seleccionado.setUsuario(Prestacion.getUsuario());
+		//Prestacion_seleccionado.setUsuario(Prestacion.getUsuario());
 
 		
 		Prestacion_actualizado = prestacionServiceImpl.actualizarPrestacion(Prestacion_seleccionado);

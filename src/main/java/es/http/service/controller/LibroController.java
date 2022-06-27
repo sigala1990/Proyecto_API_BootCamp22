@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -30,7 +31,29 @@ public class LibroController {
 		return libroServiceImpl.listarLibro();
 	}
 	
-
+	@GetMapping("/libro/titulo/{titulo}")
+	@PreAuthorize("hasAnyAuthority('ADMIN','USER','GUESS')")
+	public Libro buscarLibroPor(@PathVariable(name="titulo")String titulo){
+		return libroServiceImpl.buscarPorTitulo(titulo);
+	}
+	
+	@PostMapping("/libro/usuario/tituloasc")
+	@PreAuthorize("hasAnyAuthority('ADMIN','USER')")
+	public List<Libro> BuscarUsuarioPorTituloAsc(@RequestBody Usuario usuario){
+		return libroServiceImpl.BuscarPorUsuarioOrdenarPorTituloAsc(usuario);
+	}
+	
+	@PostMapping("/libro/usuario/titulodesc")
+	@PreAuthorize("hasAnyAuthority('ADMIN','USER')")
+	public List<Libro> BuscarUsuarioPorTituloDesc(@RequestBody Usuario usuario){
+		return libroServiceImpl.BuscarPorUsuarioOrdenarPorTituloDesc(usuario);
+	}
+	
+	@GetMapping("/libro/isbn/{isbn}")
+	@PreAuthorize("hasAnyAuthority('ADMIN','USER','GUESS')")
+	public Libro buscarPorIsbn(@PathVariable(name="isbn")String isbn) {
+		return libroServiceImpl.buscarPorIsbn(isbn);
+	}
 
 	@PostMapping("/libro")
 	@PreAuthorize("hasAnyAuthority('ADMIN','USER')")
@@ -47,6 +70,8 @@ public class LibroController {
 	}
 	
 	
+	
+	
 	@GetMapping("/libro/{id}")
 	@PreAuthorize("hasAnyAuthority('ADMIN','USER')")
 	public Libro LibroXID(@PathVariable(name="id") int id) {
@@ -56,6 +81,34 @@ public class LibroController {
 		Libro_xid=libroServiceImpl.LibroXID(id);
 				
 		return Libro_xid;
+	}
+	
+	@PatchMapping("/libro/{id}")
+	@PreAuthorize("hasAnyAuthority('ADMIN','USER')")
+	public Libro actualizarLibroPath(@PathVariable(name="id")int id,@RequestBody Libro Libro) {
+		
+		Libro Libro_seleccionado= new Libro();
+		Libro Libro_actualizado= new Libro();
+		
+		Libro_seleccionado= libroServiceImpl.LibroXID(id);
+		
+		Libro_seleccionado.setAutor(Libro.getAutor());
+		Libro_seleccionado.setTitulo(Libro.getTitulo());
+		Libro_seleccionado.setIsbn(Libro.getIsbn());
+		Libro_seleccionado.setEdad(Libro.getEdad());
+		Libro_seleccionado.setCategoria(Libro.getCategoria());
+
+		Libro_seleccionado.setCantidad_veces_reservado(Libro.getCantidad_veces_reservado());
+		Libro_seleccionado.setUrl_img(Libro.getUrl_img());
+		//Libro_seleccionado.setUsuario(Libro.getUsuario());
+		Libro_seleccionado.setEditorial(Libro.getEditorial());
+		Libro_seleccionado.setDescripcion(Libro.getDescripcion());
+		Libro_seleccionado.setDisponible(Libro.getDisponible());
+		
+		
+		Libro_actualizado = libroServiceImpl.actualizarLibro(Libro_seleccionado);
+				
+		return Libro_actualizado;
 	}
 	
 	@PutMapping("/libro/{id}")
@@ -75,7 +128,7 @@ public class LibroController {
 
 		Libro_seleccionado.setCantidad_veces_reservado(Libro.getCantidad_veces_reservado());
 		Libro_seleccionado.setUrl_img(Libro.getUrl_img());
-		Libro_seleccionado.setUsuario(Libro.getUsuario());
+		//Libro_seleccionado.setUsuario(Libro.getUsuario());
 		Libro_seleccionado.setEditorial(Libro.getEditorial());
 		Libro_seleccionado.setDescripcion(Libro.getDescripcion());
 		Libro_seleccionado.setDisponible(Libro.getDisponible());

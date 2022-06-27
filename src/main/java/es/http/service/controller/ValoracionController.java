@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -63,6 +64,26 @@ public class ValoracionController {
 		return Valoracion_xid;
 	}
 	
+	@PatchMapping("/valoracion/{id}")
+	@PreAuthorize("hasAnyAuthority('ADMIN','USER')")
+	public Valoracion actualizarValoracionPatch(@PathVariable(name="id")int id,@RequestBody Valoracion valoracion) {
+		
+		Valoracion Valoracion_seleccionado= new Valoracion();
+		Valoracion Valoracion_actualizado= new Valoracion();
+		
+		Valoracion_seleccionado= valoracionServiceImpl.valoracionXID(id);
+		
+		Valoracion_seleccionado.setLibro(valoracion.getLibro());
+		//Valoracion_seleccionado.setUsuario(valoracion.getUsuario());
+		Valoracion_seleccionado.setValorar(valoracion.getValorar());
+		
+		Valoracion_actualizado = valoracionServiceImpl.actualizarValoracion(Valoracion_seleccionado);
+		
+		//System.out.println("El Valoracion actualizado es: "+ Valoracion_actualizado);
+		
+		return Valoracion_actualizado;
+	}
+	
 	@PutMapping("/valoracion/{id}")
 	@PreAuthorize("hasAnyAuthority('ADMIN','USER')")
 	public Valoracion actualizarValoracion(@PathVariable(name="id")int id,@RequestBody Valoracion valoracion) {
@@ -73,7 +94,7 @@ public class ValoracionController {
 		Valoracion_seleccionado= valoracionServiceImpl.valoracionXID(id);
 		
 		Valoracion_seleccionado.setLibro(valoracion.getLibro());
-		Valoracion_seleccionado.setUsuario(valoracion.getUsuario());
+		//Valoracion_seleccionado.setUsuario(valoracion.getUsuario());
 		Valoracion_seleccionado.setValorar(valoracion.getValorar());
 		
 		Valoracion_actualizado = valoracionServiceImpl.actualizarValoracion(Valoracion_seleccionado);
