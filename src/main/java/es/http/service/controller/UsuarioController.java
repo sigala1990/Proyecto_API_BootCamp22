@@ -62,7 +62,7 @@ public class UsuarioController {
 	}
 	
 	@PostMapping("/usuario")
-	@PreAuthorize("hasAnyAuthority('ADMIN','USER')")
+	@PreAuthorize("hasAnyAuthority('ADMIN','USER','GUESS')")
 	public Usuario salvarUsuario(@RequestBody Usuario usuario) {
 		usuario.setPassword(bCryptPasswordEncoder.encode(usuario.getPassword()));
 		iUsuarioDAO.save(usuario);
